@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organic Craft - The Neural Bridge</title>
+    <!-- Custom Web Fonts for Premium Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+        :root {
+            /* Structural Variables */
+            --sidebar-width: 350px;
+            --glass-blur: blur(20px);
+            --border-radius-lg: 16px;
+            --border-radius-sm: 8px;
+            --transition-speed: 0.3s;
+
+            /* Base Dark Mode Settings */
+            --text-primary: #ffffff;
+            --text-secondary: #a0aab5;
+            --bg-base: #050505;
+            
+            /* Theme 1: Default (Neural Bridge) */
+            --accent-main: #00f2ff;
+            --accent-glow: rgba(0, 242, 255, 0.4);
+            --panel-bg: rgba(10, 15, 25, 0.65);
+            --panel-border: rgba(0, 242, 255, 0.2);
+            --marker-border-style: solid;
+            
+            /* Category Colors */
+            --cat-system: #00f2ff;     /* Cyan */
+            --cat-critical: #ff3333;   /* Red */
+            --cat-environment: #cc00ff; /* Purple */
+            --cat-power: #ffcc00;      /* Yellow */
+            --cat-navigation: #00ff66; /* Green */
+        }
+
+        /* Theme 2: Bio-Hazard Event */
+        body.theme-danger {
+            --accent-main: #ff3300;
+            --accent-glow: rgba(255, 51, 0, 0.4);
+            --panel-bg: rgba(25, 5, 5, 0.65);
+            --panel-border: rgba(255, 51, 0, 0.2);
+            --marker-border-style: solid;
+            --cat-system: #ff6600;
+        }
+
+        /* Theme 3: Void Matrix */
+        body.theme-hacker {
+            --accent-main: #00ff00;
+            --accent-glow: rgba(0, 255, 0, 0.4);
+            --panel-bg: rgba(5, 20, 5, 0.65);
+            --panel-border: rgba(0, 255, 0, 0.2);
+            --marker-border-style: dashed;
+            font-family: 'Courier New', Courier, monospace !important;
+        }
+
+        /* Theme 4: Quantum Core */
+        body.theme-quantum {
+            --accent-main: #ffffff;
+            --accent-glow: rgba(255, 255, 255, 0.3);
+            --panel-bg: rgba(15, 15, 15, 0.85);
+            --panel-border: rgba(255, 255, 255, 0.1);
+            --marker-border-style: solid;
+            --bg-base: #000000;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            transition: background-color var(--transition-speed);
+        }
+
+        #ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 50% 50%, var(--accent-glow) 0%, transparent 60%);
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        #sidebar {
+            position: relative;
+            z-index: 10;
+            width: var(--sidebar-width);
+            height: 100vh;
+            background: var(--panel-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-right: 1px solid var(--panel-border);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem 1.5rem;
+            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+        }
+
+        #sidebar::-webkit-scrollbar { width: 6px; }
+        #sidebar::-webkit-scrollbar-track { background: transparent; }
+        #sidebar::-webkit-scrollbar-thumb { background: var(--panel-border); border-radius: 3px; }
+
+        .brand-header { margin-bottom: 2.5rem; }
+        .brand-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+            color: var(--accent-main);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+        .brand-header p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        .control-group {
+            margin-bottom: 2rem;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 1.2rem;
+            border-radius: var(--border-radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .control-group label {
+            display: block;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            color: var(--accent-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.8rem;
+        }
+
+        .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+        .btn {
+            width: 100%;
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--panel-border);
+            padding: 10px 15px;
+            border-radius: var(--border-radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .btn:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent-main);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+        input[type="file"] {
+            font-size: 100px;
+            position: absolute;
+            left: 0; top: 0; opacity: 0;
+            cursor: pointer; height: 100%;
+        }
+
+        select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            color: var(--text-primary);
+            border: 1px solid var(--panel-border);
+            padding: 10px;
+            border-radius: var(--border-radius-sm);
+            font-family: 'Inter', sans-serif;
+            outline: none; cursor: pointer;
+            appearance: none;
+        }
+        select:focus { border-color: var(--accent-main); }
+        .playback-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .playback-controls .btn-full { grid-column: span 2; }
+
+        #main-stage {
+            position: relative;
+            flex: 1;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            z-index: 1;
+        }
+
+        #visual-wrapper {
+            width: 100%;
+            max-width: 1600px;
+            aspect-ratio: 16 / 9;
+            position: relative;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--panel-border);
+            background: #000;
+        }
+
+        #container {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            /* Container will scale for zoom effects */
+            transform-origin: 50% 50%;
+        }
+
+        #svg-lines {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        /* Neural Link Styling */
+        .neural-link {
+            stroke-width: 2;
+            fill: none;
+            opacity: 0.7;
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            filter: drop-shadow(0 0 4px currentColor);
+        }
+
+        .marker-group {
+            position: absolute;
+            z-index: 10;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        /* Marker Color Modifiers based on category */
+        .marker {
+            width: 30px;
+            height: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px var(--marker-border-style) var(--accent-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px var(--accent-glow);
+            pointer-events: auto;
+            cursor: crosshair;
+            position: relative;
+            backdrop-filter: blur(4px);
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+        
+        .marker::after {
+            content: '';
+            width: 8px; height: 8px;
+            background: var(--accent-main);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-main);
+        }
+
+        /* Classes assigned dynamically for categories */
+        .cat-critical { border-color: var(--cat-critical); box-shadow: 0 0 20px rgba(255, 51, 51, 0.4); }
+        .cat-critical::after { background: var(--cat-critical); box-shadow: 0 0 8px var(--cat-critical); }
+        
+        .cat-power { border-color: var(--cat-power); box-shadow: 0 0 20px rgba(255, 204, 0, 0.4); }
+        .cat-power::after { background: var(--cat-power); box-shadow: 0 0 8px var(--cat-power); }
+        
+        .cat-environment { border-color: var(--cat-environment); box-shadow: 0 0 20px rgba(204, 0, 255, 0.4); }
+        .cat-environment::after { background: var(--cat-environment); box-shadow: 0 0 8px var(--cat-environment); }
+        
+        .cat-navigation { border-color: var(--cat-navigation); box-shadow: 0 0 20px rgba(0, 255, 102, 0.4); }
+        .cat-navigation::after { background: var(--cat-navigation); box-shadow: 0 0 8px var(--cat-navigation); }
+
+        .cat-system { border-color: var(--cat-system); box-shadow: 0 0 20px rgba(0, 242, 255, 0.4); }
+        .cat-system::after { background: var(--cat-system); box-shadow: 0 0 8px var(--cat-system); }
+
+        .marker:hover { transform: scale(1.2); }
+        .marker-pulse {
+            position: absolute;
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            border: 1px solid var(--accent-main);
+            opacity: 0;
+        }
+
+        .info-card {
+            position: absolute;
+            background: var(--panel-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            color: var(--text-primary);
+            padding: 1.2rem;
+            border: 1px solid var(--panel-border);
+            border-radius: var(--border-radius-sm);
+            width: 300px;
+            opacity: 0; z-index: 11;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            pointer-events: none;
+        }
+
+        .info-card.right { left: 50px; top: -20px; border-left: 4px solid var(--accent-main); }
+        .info-card.left { right: 50px; top: -20px; border-right: 4px solid var(--accent-main); }
+        
+        /* Category specific card borders */
+        .info-card.right.cat-critical { border-left-color: var(--cat-critical); }
+        .info-card.left.cat-critical { border-right-color: var(--cat-critical); }
+        .info-card.right.cat-power { border-left-color: var(--cat-power); }
+        .info-card.left.cat-power { border-right-color: var(--cat-power); }
+        .info-card.right.cat-environment { border-left-color: var(--cat-environment); }
+        .info-card.left.cat-environment { border-right-color: var(--cat-environment); }
+        .info-card.right.cat-navigation { border-left-color: var(--cat-navigation); }
+        .info-card.left.cat-navigation { border-right-color: var(--cat-navigation); }
+        
+        .info-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+            color: var(--accent-main);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .info-card h3::before {
+            content: ''; display: inline-block;
+            width: 8px; height: 8px;
+            background: var(--accent-main);
+            border-radius: 2px;
+        }
+        /* Dynamic Header Dots based on category */
+        .info-card.cat-critical h3 { color: var(--cat-critical); }
+        .info-card.cat-critical h3::before { background: var(--cat-critical); }
+        .info-card.cat-power h3 { color: var(--cat-power); }
+        .info-card.cat-power h3::before { background: var(--cat-power); }
+        .info-card.cat-environment h3 { color: var(--cat-environment); }
+        .info-card.cat-environment h3::before { background: var(--cat-environment); }
+        .info-card.cat-navigation h3 { color: var(--cat-navigation); }
+        .info-card.cat-navigation h3::before { background: var(--cat-navigation); }
+
+        .info-card p {
+            margin: 0 0 1rem 0;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+        
+        /* Telemetry Data Points inside Card */
+        .telemetry-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 10px;
+        }
+        .telemetry-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            font-family: 'Orbitron', monospace;
+        }
+        .telemetry-label { color: var(--text-secondary); }
+        .telemetry-value { font-weight: bold; color: var(--text-primary); }
+        .status-optimal { color: #00ff66; text-shadow: 0 0 5px #00ff66; }
+        .status-warning { color: #ffcc00; text-shadow: 0 0 5px #ffcc00; }
+        .status-stable { color: #00f2ff; text-shadow: 0 0 5px #00f2ff; }
+        
+        .info-card .frame-id {
+            position: absolute;
+            top: 5px; right: 10px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.6rem;
+            color: var(--accent-main);
+            opacity: 0.5;
+        }
+
+        #loader {
+            position: fixed; top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: var(--bg-base); z-index: 9999;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            color: var(--accent-main);
+            font-family: 'Orbitron', sans-serif;
+            transition: opacity 0.8s ease;
+        }
+        .spinner {
+            width: 50px; height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--accent-main);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        #status-indicator {
+            margin-top: auto;
+            display: flex; align-items: center; gap: 10px;
+            font-size: 0.8rem; color: var(--text-secondary);
+        }
+        .status-dot {
+            width: 8px; height: 8px;
+            background: var(--accent-main); border-radius: 50%;
+            box-shadow: 0 0 8px var(--accent-main);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.5; box-shadow: 0 0 0 rgba(0,242,255,0); }
+            50% { opacity: 1; box-shadow: 0 0 10px var(--accent-main); }
+            100% { opacity: 0.5; box-shadow: 0 0 0 rgba(0,242,255,0); }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ambient-bg"></div>
+    <div id="loader"><div class="spinner"></div><div id="loader-text">INITIALIZING NEURAL LINK...</div></div>
+
+    <aside id="sidebar">
+        <div class="brand-header">
+            <h1>Organic Craft</h1>
+            <p>Advanced Biomechanical Telemetry & Visual Analyzer. Connected to Neural Bridge.</p>
+        </div>
+
+        <div class="control-group">
+            <label>1. Telemetry Source</label>
+            <div class="file-upload-wrapper">
+                <button class="btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                    Upload Image
+                </button>
+                <input type="file" id="imageUpload" accept="image/*">
+            </div>
+            <div class="file-upload-wrapper">
+                <button class="btn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    Upload JSON
+                </button>
+                <input type="file" id="jsonUpload" accept=".json">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label>2. UI Environment</label>
+            <select id="themeSelect">
+                <option value="default">Neural Bridge (Cyan)</option>
+                <option value="danger">Bio-Hazard (Crimson)</option>
+                <option value="hacker">Void Matrix (Terminal)</option>
+                <option value="quantum">Quantum Core (Monochrome)</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label>3. Playback Sequence</label>
+            <div class="playback-controls">
+                <button class="btn" id="btnPlay">▶ Play</button>
+                <button class="btn" id="btnPause">⏸ Pause</button>
+                <button class="btn btn-full" id="btnRestart">🔄 Initialize Sequence</button>
+            </div>
+        </div>
+
+        <div id="status-indicator">
+            <div class="status-dot"></div>
+            <span id="status-text">System Idle. Awaiting Data.</span>
+        </div>
+    </aside>
+
+    <main id="main-stage">
+        <div id="visual-wrapper">
+            <div id="container">
+                <svg id="svg-lines"></svg>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const container = document.getElementById('container');
+        const visualWrapper = document.getElementById('visual-wrapper');
+        const loader = document.getElementById('loader');
+        const statusText = document.getElementById('status-text');
+        const svgCanvas = document.getElementById('svg-lines');
+        
+        const DEFAULT_IMAGE_PATH = 'organic_craft_frame_3_the_neural_bridge.png';
+        const DEFAULT_JSON_PATH = 'organic_craft.json';
+        
+        let masterTimeline = gsap.timeline({ paused: true });
+        let currentData = null;
+        let markersHTMLElements = []; 
+        let svgLinesElements = []; // Store lines for GSAP targets
+
+        // CSS Variables map for categories
+        const categoryColors = {
+            'system': 'var(--cat-system)',
+            'critical': 'var(--cat-critical)',
+            'environment': 'var(--cat-environment)',
+            'power': 'var(--cat-power)',
+            'navigation': 'var(--cat-navigation)'
+        };
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            statusText.innerText = "Establishing Connection...";
+            try {
+                await loadBackgroundImage(DEFAULT_IMAGE_PATH);
+                const response = await fetch(DEFAULT_JSON_PATH);
+                if (!response.ok) throw new Error("JSON not found");
+                currentData = await response.json();
+                
+                buildScene(currentData);
+                statusText.innerText = "Telemetry Sync Complete.";
+                
+                gsap.to(loader, { opacity: 0, duration: 1, onComplete: () => loader.style.display = 'none' });
+                masterTimeline.play();
+            } catch (error) {
+                console.error(error);
+                document.getElementById('loader-text').innerText = "AUTO-SYNC FAILED. MANUAL OVERRIDE REQUIRED.";
+                statusText.innerText = "Awaiting manual input.";
+                setTimeout(() => gsap.to(loader, { opacity: 0, duration: 1, onComplete: () => loader.style.display = 'none' }), 1500);
+            }
+        });
+
+        function loadBackgroundImage(url) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => { container.style.backgroundImage = `url('${url}')`; resolve(); };
+                img.onerror = () => reject(new Error("Image failed to load"));
+                img.src = url;
+            });
+        }
+
+        document.getElementById('imageUpload').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) { container.style.backgroundImage = `url('${event.target.result}')`; statusText.innerText = "Local Visual Loaded."; };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        document.getElementById('jsonUpload').addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    try {
+                        currentData = JSON.parse(event.target.result);
+                        buildScene(currentData);
+                        statusText.innerText = "Local Telemetry Loaded.";
+                        masterTimeline.restart();
+                    } catch (error) { alert("Invalid JSON Format.\nDetails: " + error.message); }
+                };
+                reader.readAsText(file);
+            }
+        });
+
+        function buildScene(data) {
+            markersHTMLElements.forEach(el => el.remove());
+            markersHTMLElements = [];
+            svgCanvas.innerHTML = '';
+            svgLinesElements = [];
+            masterTimeline.clear();
+            
+            // Reset container scale/origin
+            gsap.set(container, { scale: 1, transformOrigin: "50% 50%", filter: "blur(0px)" });
+
+            if (!data.markers || !Array.isArray(data.markers)) return;
+
+            masterTimeline.fromTo(container, 
+                { filter: "blur(20px)", scale: 1.1 },
+                { filter: "blur(0px)", scale: 1, duration: 2, ease: "power3.out" }
+            );
+
+            // Create a lookup for connections
+            const markerLookup = {};
+            data.markers.forEach(m => markerLookup[m.id] = m);
+
+            data.markers.forEach((m, index) => {
+                const x = Math.max(0, Math.min(100, m.x));
+                const y = Math.max(0, Math.min(100, m.y));
+                
+                // Color category logic
+                const catClass = m.category ? `cat-${m.category}` : '';
+                const baseColor = m.category ? categoryColors[m.category] : 'var(--accent-main)';
+
+                // Formulate Data Points HTML if they exist
+                let telemetryHTML = '';
+                if (m.data_points && m.data_points.length > 0) {
+                    telemetryHTML = '<div class="telemetry-grid">';
+                    m.data_points.forEach(dp => {
+                        telemetryHTML += `
+                            <div class="telemetry-row">
+                                <span class="telemetry-label">${dp.label}</span>
+                                <span class="telemetry-value status-${dp.status || 'stable'}">${dp.value}</span>
+                            </div>
+                        `;
+                    });
+                    telemetryHTML += '</div>';
+                }
+
+                // Append UI Elements
+                const group = document.createElement('div');
+                group.className = 'marker-group';
+                group.style.left = `${x}%`; group.style.top = `${y}%`;
+
+                const pulse = document.createElement('div');
+                pulse.className = 'marker-pulse';
+                if (m.category) { pulse.style.borderColor = baseColor; }
+
+                const marker = document.createElement('div');
+                marker.className = `marker ${catClass}`;
+
+                const isRightSide = x > 60;
+                const card = document.createElement('div');
+                card.className = `info-card ${isRightSide ? 'left' : 'right'} ${catClass}`;
+                card.innerHTML = `
+                    <div class="frame-id">ID: ${m.id}</div>
+                    <h3>${m.label}</h3>
+                    <p>${m.description}</p>
+                    ${telemetryHTML}
+                `;
+
+                // Handle SVG Connections
+                let outLines = [];
+                if (m.connects_to && m.connects_to.length > 0) {
+                    m.connects_to.forEach(targetId => {
+                        const target = markerLookup[targetId];
+                        if (target) {
+                            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                            line.setAttribute('x1', `${x}%`);
+                            line.setAttribute('y1', `${y}%`);
+                            line.setAttribute('x2', `${target.x}%`);
+                            line.setAttribute('y2', `${target.y}%`);
+                            // We use pathLength="100" to make stroke-dasharray predictable
+                            line.setAttribute('pathLength', '100');
+                            line.setAttribute('class', 'neural-link');
+                            line.style.stroke = baseColor;
+                            svgCanvas.appendChild(line);
+                            outLines.push(line);
+                        }
+                    });
+                }
+
+                // Interactions
+                marker.addEventListener('mouseenter', () => {
+                    masterTimeline.pause();
+                    gsap.to(card, { opacity: 1, scale: 1.05, duration: 0.3, ease: "power2.out", display: 'block' });
+                    gsap.to(marker, { scale: 1.3, duration: 0.3 });
+                    // Highlight lines
+                    if(outLines.length) gsap.to(outLines, { opacity: 1, strokeWidth: 4, duration: 0.3 });
+                });
+                
+                marker.addEventListener('mouseleave', () => {
+                    gsap.to(card, { scale: 1, duration: 0.3 });
+                    gsap.to(marker, { scale: 1, duration: 0.3 });
+                    if(outLines.length) gsap.to(outLines, { opacity: 0.7, strokeWidth: 2, duration: 0.3 });
+                    masterTimeline.play();
+                });
+
+                group.appendChild(pulse);
+                group.appendChild(marker);
+                group.appendChild(card);
+                container.appendChild(group);
+                markersHTMLElements.push(group);
+
+                // Initial States
+                gsap.set(group, { opacity: 0, scale: 0 });
+                gsap.set(card, { opacity: 0, x: isRightSide ? 20 : -20 });
+                if (outLines.length) { gsap.set(outLines, { strokeDashoffset: 100 }); }
+
+                const displayDuration = m.duration || 3;
+
+                // --- Build Timeline Sequence ---
+                
+                // If there's a camera zoom, animate container BEFORE marker appears
+                if (m.zoom) {
+                    masterTimeline.to(container, {
+                        scale: m.zoom,
+                        transformOrigin: `${x}% ${y}%`,
+                        duration: 1.5,
+                        ease: "power2.inOut"
+                    }, "-=0.2");
+                }
+
+                masterTimeline
+                    .to(group, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" })
+                    .to(pulse, { opacity: 0.8, scale: 1.5, duration: 0.5, ease: "power2.out" }, "-=0.4")
+                    .to(pulse, { opacity: 0, scale: 2, duration: 0.5 }, "-=0.1")
+                    .to(card, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, "-=0.5");
+                
+                // Draw Neural Connections organically if they exist
+                if (outLines.length) {
+                    masterTimeline.to(outLines, {
+                        strokeDashoffset: 0,
+                        duration: 1.2,
+                        ease: "power2.out",
+                        stagger: 0.2
+                    }, "-=0.5"); // Starts while card is appearing
+                }
+
+                masterTimeline.to({}, { duration: displayDuration });
+
+                // Fade out marker, card, and lines
+                let targets = [group, card];
+                if (outLines.length) targets = targets.concat(outLines);
+                
+                masterTimeline.to(targets, { opacity: 0, scale: 0.9, duration: 0.5, ease: "power2.in" });
+                
+                // Revert zoom if applied, so it's ready for next sequence or normal view
+                if (m.zoom) {
+                    masterTimeline.to(container, {
+                        scale: 1,
+                        duration: 1.5,
+                        ease: "power2.inOut"
+                    }, "-=0.5");
+                }
+            });
+            
+            masterTimeline.call(() => {
+                statusText.innerText = "Sequence Complete. System Idle.";
+                // Reset container at the very end just to be safe
+                gsap.to(container, { scale: 1, duration: 1, ease: "power2.inOut" });
+            });
+        }
+
+        document.getElementById('btnPlay').addEventListener('click', () => { masterTimeline.play(); statusText.innerText = "Sequence Playing..."; });
+        document.getElementById('btnPause').addEventListener('click', () => { masterTimeline.pause(); statusText.innerText = "Sequence Paused."; });
+        document.getElementById('btnRestart').addEventListener('click', () => { masterTimeline.restart(); statusText.innerText = "Sequence Restarted."; });
+
+        document.getElementById('themeSelect').addEventListener('change', function (e) {
+            document.body.className = ''; 
+            if (e.target.value !== 'default') { document.body.classList.add(`theme-${e.target.value}`); }
+            gsap.fromTo("body", {opacity: 0.8}, {opacity: 1, duration: 0.5});
+        });
+    </script>
+</body>
+
+</html>
