@@ -1,0 +1,125 @@
+{
+    "scene_name": "Organic Craft - The Heart (Motor)",
+    "markers": [
+        {
+            "id": "m1",
+            "x": 50,
+            "y": 5,
+            "label": "Logo: Organic Craft",
+            "description": "Central nexus identity header.",
+            "category": "system",
+            "duration": 2,
+            "connects_to": ["m2", "m3", "m4", "m5"]
+        },
+        {
+            "id": "m2",
+            "x": 35,
+            "y": 5,
+            "label": "Navigation: Fleet",
+            "description": "Return to the celestial fleet overview.",
+            "category": "navigation",
+            "duration": 1.5
+        },
+        {
+            "id": "m3",
+            "x": 65,
+            "y": 5,
+            "label": "Navigation: Technology",
+            "description": "Details about biomechanical systems.",
+            "category": "navigation",
+            "duration": 1.5
+        },
+        {
+            "id": "m4",
+            "x": 75,
+            "y": 5,
+            "label": "Navigation: The Journey",
+            "description": "Stellar map and current coordinates.",
+            "category": "navigation",
+            "duration": 1.5
+        },
+        {
+            "id": "m5",
+            "x": 88,
+            "y": 5,
+            "label": "Navigation: About Us",
+            "description": "Information regarding the origin of Organic Craft.",
+            "category": "navigation",
+            "duration": 1.5
+        },
+        {
+            "id": "m6",
+            "x": 20,
+            "y": 85,
+            "label": "Frame 2",
+            "description": "Current view: The Heart (Motor). Indicates active module.",
+            "category": "system",
+            "duration": 2.5
+        },
+        {
+            "id": "m7",
+            "x": 50,
+            "y": 50,
+            "label": "The Singularity Core",
+            "description": "Glowing white energy core generating propulsion and life-support.",
+            "category": "power",
+            "duration": 4,
+            "zoom": 1.25,
+            "connects_to": ["m8", "m9", "m11"]
+        },
+        {
+            "id": "m8",
+            "x": 85,
+            "y": 35,
+            "label": "Biometric Resonance",
+            "description": "Displays the resonance wave frequency between the bio-engine and the organic hull.",
+            "category": "critical",
+            "duration": 3.5,
+            "data_points": [
+                {"label": "Stability", "value": "93.7%", "status": "stable"},
+                {"label": "Wave Output", "value": "Harmonic", "status": "optimal"}
+            ]
+        },
+        {
+            "id": "m9",
+            "x": 85,
+            "y": 65,
+            "label": "Soul-Drive Levels",
+            "description": "Telemetry of the active singularity containment field.",
+            "category": "power",
+            "duration": 3.5,
+            "data_points": [
+                {"label": "Efficiency", "value": "89%", "status": "optimal"},
+                {"label": "Containment", "value": "Active", "status": "stable"}
+            ]
+        },
+        {
+            "id": "m10",
+            "x": 25,
+            "y": 50,
+            "label": "Bio-Cage",
+            "description": "Rib-like translucent structures shielding the singularity from structural stress.",
+            "category": "environment",
+            "duration": 2.5,
+            "connects_to": ["m7"]
+        },
+        {
+            "id": "m11",
+            "x": 50,
+            "y": 35,
+            "label": "Inscribed Rings",
+            "description": "Spinning gyroscopic rings featuring glowing ancestral runes that sequence energy patterns.",
+            "category": "system",
+            "duration": 3
+        },
+        {
+            "id": "m12",
+            "x": 90,
+            "y": 88,
+            "label": "Variant Pagination",
+            "description": "Variant 2 of 3. Proceed to the next module in sequence.",
+            "category": "navigation",
+            "duration": 2
+        }
+    ]
+}
