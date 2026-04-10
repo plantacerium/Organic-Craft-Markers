@@ -36,6 +36,15 @@ The application operates as a standalone web experience. It automatically attemp
 - 📁 **Manual Override**: Sleek custom file upload controls allow for uploading any new image and mapping file on the fly.
 
 ---
+## ⚡ Support
+<div align="center">
+
+**Made with ❤️ and ☕ by the Plantacerium**
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/plantacerium)
+
+⭐**Star us on GitHub**⭐
+</div>
 
 ## 🛠️ Installation & Usage
 
