@@ -1,14 +1,16 @@
 {
     "scene_name": "Organic Craft - The Neural Bridge",
+    "frame_id": "FRAME 3",
+    "description": "The command sanctuary. Pilot bio-mechanical throne interfaced with Earth's terrestrial holomap, living data tendrils, and real-time cognitive metrics.",
     "markers": [
         {
             "id": "m1",
             "x": 19,
             "y": 8,
             "label": "Logo: Organic Craft",
-            "description": "Visual identity of the ship. Uses elegant serif typography with organic finishes.",
+            "description": "Visual identity of the vessel. Rendered in polished gold with organic bio-mechanical filigree.",
             "category": "system",
-            "duration": 2.5,
+            "duration": 2.2,
             "connects_to": ["m2", "m3"]
         },
         {
@@ -16,70 +18,74 @@
             "x": 52,
             "y": 4,
             "label": "Navigation: Explore",
-            "description": "Main access to the stellar exploration database.",
+            "description": "Primary gate into the cartographic database of charted star systems and warp waypoints.",
             "category": "navigation",
-            "duration": 2
+            "duration": 1.8
         },
         {
             "id": "m3",
             "x": 63,
             "y": 4,
             "label": "Navigation: Vessels",
-            "description": "Catalog of organic fleet vessels.",
+            "description": "Organic Fleet registry, vessel telemetry states, and biological health logs across the swarm.",
             "category": "navigation",
-            "duration": 2
+            "duration": 1.8
         },
         {
             "id": "m4",
             "x": 18,
             "y": 15,
-            "label": "Frame Identifier",
-            "description": "Frame 3: The Neural Bridge. Indicates the current section.",
+            "label": "Frame 3: The Neural Bridge",
+            "description": "Sanctuary section identifier: Bridge command module. Human pilot consciousness directly fused with vessel nervous system.",
             "category": "system",
-            "duration": 2,
-            "connects_to": ["m10"]
+            "duration": 2.5,
+            "connects_to": ["m5", "m10"]
         },
         {
             "id": "m5",
             "x": 50,
             "y": 38,
             "label": "Terrestrial Holomap",
-            "description": "Global projection of Earth in a fluid data bubble. Biome monitoring.",
+            "description": "Luminescent floating sphere projecting Earth in real time. Continuous planetary biome and biosphere monitoring.",
             "category": "environment",
-            "duration": 3.5,
-            "connects_to": ["m6", "m7", "m8"],
-            "zoom": 1.2,
+            "duration": 4.0,
+            "zoom": 1.45,
+            "connects_to": ["m6", "m7", "m8", "m20"],
             "data_points": [
                 {"label": "Biosphere Integrity", "value": "98.2%", "status": "optimal"},
-                {"label": "Atmospheric Toxicity", "value": "0.4%", "status": "stable"}
+                {"label": "Atmospheric Toxicity", "value": "0.4%", "status": "stable"},
+                {"label": "Orbital Telemetry", "value": "Geo-Sync", "status": "optimal"}
             ]
         },
         {
             "id": "m6",
             "x": 50,
             "y": 62,
-            "label": "Link Seat",
-            "description": "Bio-mechanical control throne that physically connects with the pilot's spine.",
+            "label": "Link Seat (Pilot Throne)",
+            "description": "Biomechanical command throne that physically connects directly with the pilot's spinal cord via synthetic neural synapses.",
             "category": "critical",
-            "duration": 3.5,
-            "connects_to": ["m7", "m12", "m14"],
+            "duration": 4.0,
+            "zoom": 1.4,
+            "connects_to": ["m5", "m7", "m12", "m20"],
             "data_points": [
                 {"label": "Biomech Integration", "value": "100%", "status": "optimal"},
-                {"label": "Spinal Stress", "value": "12%", "status": "stable"}
+                {"label": "Spinal Stress", "value": "12%", "status": "stable"},
+                {"label": "Synaptic Feedback", "value": "0.02 ms", "status": "optimal"}
             ]
         },
         {
             "id": "m7",
             "x": 70,
             "y": 55,
-            "label": "Cognitive Interface",
-            "description": "Real-time brain visualization showing dopamine levels and synchronization.",
+            "label": "Cognitive Interface HUD",
+            "description": "Real-time brainwave visualization tracking dopamine levels, cognitive load, and neural sync rate during flight.",
             "category": "critical",
-            "duration": 4,
-            "zoom": 1.3,
+            "duration": 4.0,
+            "zoom": 1.5,
+            "connects_to": ["m6", "m14"],
             "data_points": [
-                {"label": "Dopamine Levels", "value": "87%", "status": "warning"},
                 {"label": "Neural Sync Rate", "value": "99.4%", "status": "optimal"},
+                {"label": "Dopamine Levels", "value": "87%", "status": "warning"},
                 {"label": "Cognitive Load", "value": "45%", "status": "stable"}
             ]
         },
@@ -87,74 +93,87 @@
             "id": "m8",
             "x": 30,
             "y": 55,
-            "label": "Proximity Radar",
-            "description": "Circular scanning of nearby objects in deep space.",
+            "label": "Deep Space Proximity Radar",
+            "description": "Volumetric spherical radar mapping gravitational anomalies, asteroids, and nearby vessels within 500,000 km.",
             "category": "navigation",
-            "duration": 2.5,
-            "connects_to": ["m6"]
+            "duration": 3.0,
+            "zoom": 1.35,
+            "connects_to": ["m5", "m6"],
+            "data_points": [
+                {"label": "Scan Radius", "value": "500k km", "status": "optimal"},
+                {"label": "Hostile Signatures", "value": "0", "status": "optimal"}
+            ]
         },
         {
             "id": "m9",
             "x": 80,
             "y": 15,
-            "label": "Spiral Galaxy",
-            "description": "Stellar sector visible through the right transparent hull.",
+            "label": "Spiral Galaxy Vista",
+            "description": "Stellar panorama visible through the right semi-transparent hull canopy. Real-time starlight spectrum analysis.",
             "category": "environment",
-            "duration": 3,
-            "zoom": 1.4
+            "duration": 3.0,
+            "zoom": 1.35,
+            "connects_to": ["m19"]
         },
         {
             "id": "m10",
             "x": 20,
             "y": 15,
-            "label": "Purple Nebula",
-            "description": "Ionized gas clouds captured by visible spectrum sensors.",
+            "label": "Purple Nebula Canopy",
+            "description": "Ionized interstellar gas clouds shimmering through the left viewport. Visual sensor calibration zone.",
             "category": "environment",
-            "duration": 3,
-            "zoom": 1.4
+            "duration": 3.0,
+            "zoom": 1.35,
+            "connects_to": ["m4", "m19"]
         },
         {
             "id": "m11",
             "x": 93,
             "y": 85,
-            "label": "Progress Indicator",
-            "description": "Shows we are at step 3 of 3 of the control sanctuary.",
+            "label": "Sanctuary Progress: 3 of 3",
+            "description": "Sequence step completion indicator: Final stage of the vessel traversal sequence.",
             "category": "system",
-            "duration": 2
+            "duration": 2.0
         },
         {
             "id": "m12",
             "x": 50,
             "y": 92,
-            "label": "Data Tendrils",
-            "description": "Living optical fibers that distribute core energy across the floor.",
+            "label": "Living Data Tendrils",
+            "description": "Bioluminescent optical fibers growing across the floor, carrying vital telemetry from the core heart directly to the throne.",
             "category": "power",
-            "duration": 3,
-            "connects_to": ["m13", "m16"]
+            "duration": 3.2,
+            "connects_to": ["m6", "m13", "m16"],
+            "data_points": [
+                {"label": "Fiber Bandwidth", "value": "120 Tbps", "status": "optimal"},
+                {"label": "Signal Attenuation", "value": "0.001 dB", "status": "optimal"}
+            ]
         },
         {
             "id": "m13",
             "x": 35,
             "y": 52,
-            "label": "Power Metrics",
-            "description": "Bar chart indicating warp drive energy output.",
+            "label": "Warp Drive Power Metrics",
+            "description": "Equalizer bar indicators displaying output from the singularity core into the bridge substations.",
             "category": "power",
-            "duration": 3,
+            "duration": 3.2,
+            "connects_to": ["m12", "m8"],
             "data_points": [
                 {"label": "Warp Core Output", "value": "1.21 GW", "status": "optimal"},
-                {"label": "Plasma Reserve", "value": "42%", "status": "warning"}
+                {"label": "Plasma Reserve", "value": "92%", "status": "optimal"}
             ]
         },
         {
             "id": "m14",
             "x": 65,
             "y": 55,
-            "label": "AI Vital Status",
-            "description": "Health monitor of the ship's artificial consciousness.",
+            "label": "Symbiotic AI Vital Status",
+            "description": "Health diagnostic of the organic ship's semi-sentient consciousness and emotional equilibrium.",
             "category": "system",
-            "duration": 3,
+            "duration": 3.0,
+            "connects_to": ["m7"],
             "data_points": [
-                {"label": "AI Core Temp", "value": "34°C", "status": "stable"},
+                {"label": "AI Core Temp", "value": "34.2 °C", "status": "stable"},
                 {"label": "Logic Loops", "value": "100%", "status": "optimal"}
             ]
         },
@@ -162,8 +181,8 @@
             "id": "m15",
             "x": 5,
             "y": 50,
-            "label": "Hull Bone Structure",
-            "description": "Bio-ceramic composite ribs protecting the bridge.",
+            "label": "Rib Structure Armor",
+            "description": "Bio-ceramic composite ribs encasing the neural sanctuary in shock-absorbing organic lattice.",
             "category": "system",
             "duration": 2.5
         },
@@ -171,17 +190,18 @@
             "id": "m16",
             "x": 95,
             "y": 50,
-            "label": "Plasma Reflector",
-            "description": "Points of intense light where energy concentrates on the walls.",
+            "label": "Wall Plasma Reflectors",
+            "description": "Focal nodes embedded in the lateral membranes concentrating excess plasma into illumination.",
             "category": "power",
-            "duration": 2.5
+            "duration": 2.5,
+            "connects_to": ["m12"]
         },
         {
             "id": "m17",
             "x": 10,
             "y": 96,
-            "label": "Copyright info",
-            "description": "Legal registry of the Organic Sacred Spacecraft technology © 2024.",
+            "label": "Registry & Copyright",
+            "description": "Organic Sacred Spacecraft Architecture © 2026. Living technology patent.",
             "category": "system",
             "duration": 1.5
         },
@@ -189,8 +209,8 @@
             "id": "m18",
             "x": 92,
             "y": 97,
-            "label": "Social Networks",
-            "description": "External communication channels and data transmission to base.",
+            "label": "Transceiver Array",
+            "description": "Deep-space comms array broadcasting encrypted data to Earth base stations.",
             "category": "system",
             "duration": 1.5
         },
@@ -198,25 +218,25 @@
             "id": "m19",
             "x": 50,
             "y": 18,
-            "label": "Observation Dome",
-            "description": "Visual vanishing point towards the infinity of outer space.",
+            "label": "Observation Canopy Vertex",
+            "description": "The highest vanishing point of the bridge dome, looking forward into the cosmic infinite.",
             "category": "environment",
-            "duration": 4,
-            "zoom": 1.2,
+            "duration": 3.5,
+            "zoom": 1.3,
             "connects_to": ["m9", "m10"]
         },
         {
             "id": "m20",
             "x": 50,
             "y": 50,
-            "label": "Synchronization Point",
-            "description": "The geometric center where human mind and machine converge.",
+            "label": "Point of Convergence",
+            "description": "The exact geometric center of the Neural Bridge where the pilot's thoughts become vessel velocity.",
             "category": "critical",
-            "duration": 5,
+            "duration": 4.5,
+            "zoom": 1.3,
             "connects_to": ["m5", "m6"],
-            "zoom": 1.15,
             "data_points": [
-                {"label": "Global Synergy", "value": "MAX", "status": "optimal"}
+                {"label": "Global Synergy", "value": "100% MAX", "status": "optimal"}
             ]
         }
     ]

@@ -1,22 +1,24 @@
 {
     "scene_name": "Organic Craft - The Heart (Motor)",
+    "frame_id": "FRAME 2",
+    "description": "The beating singularity heart of the Leviathan. Ancient runic gyroscopes contain a living vortex of pure plasma energy within a translucent bone cage.",
     "markers": [
         {
             "id": "m1",
             "x": 50,
             "y": 5,
             "label": "Logo: Organic Craft",
-            "description": "Central nexus identity header.",
+            "description": "Central identity insignia presiding over the core propulsion cathedral.",
             "category": "system",
-            "duration": 2,
+            "duration": 2.0,
             "connects_to": ["m2", "m3", "m4", "m5"]
         },
         {
             "id": "m2",
-            "x": 35,
+            "x": 37,
             "y": 5,
-            "label": "Navigation: Fleet",
-            "description": "Return to the celestial fleet overview.",
+            "label": "Nav: Fleet",
+            "description": "Sub-space transponder link to the remaining organic capital vessels in the quadrant.",
             "category": "navigation",
             "duration": 1.5
         },
@@ -24,102 +26,142 @@
             "id": "m3",
             "x": 65,
             "y": 5,
-            "label": "Navigation: Technology",
-            "description": "Details about biomechanical systems.",
+            "label": "Nav: Technology",
+            "description": "Biomechanical propulsion blueprints, soul-drive schematics, and runic containment archives.",
             "category": "navigation",
             "duration": 1.5
         },
         {
             "id": "m4",
-            "x": 75,
+            "x": 79,
             "y": 5,
-            "label": "Navigation: The Journey",
-            "description": "Stellar map and current coordinates.",
+            "label": "Nav: The Journey",
+            "description": "Chronological expedition logs from the origin world through the Veil of Nebulae.",
             "category": "navigation",
             "duration": 1.5
         },
         {
             "id": "m5",
-            "x": 88,
+            "x": 91,
             "y": 5,
-            "label": "Navigation: About Us",
-            "description": "Information regarding the origin of Organic Craft.",
+            "label": "Nav: About Us",
+            "description": "The biological manifesto of the Living Vessels and the symbiotic crew bonding rituals.",
             "category": "navigation",
             "duration": 1.5
         },
         {
             "id": "m6",
-            "x": 20,
-            "y": 85,
-            "label": "Frame 2",
-            "description": "Current view: The Heart (Motor). Indicates active module.",
+            "x": 28,
+            "y": 88,
+            "label": "Frame 2: The Heart (Motor)",
+            "description": "Active module identifier: The Living Engine Room. Singularity core operating at sustained optimal output.",
             "category": "system",
-            "duration": 2.5
+            "duration": 2.5,
+            "connects_to": ["m7", "m10"]
         },
         {
             "id": "m7",
-            "x": 50,
-            "y": 50,
-            "label": "The Singularity Core",
-            "description": "Glowing white energy core generating propulsion and life-support.",
-            "category": "power",
-            "duration": 4,
-            "zoom": 1.25,
-            "connects_to": ["m8", "m9", "m11"]
+            "x": 38,
+            "y": 48,
+            "label": "The Contained Singularity",
+            "description": "The blazing cosmic heart of the ship: a captured micro-black hole emitting pure luminescent plasma. Powers warp drive and life-support.",
+            "category": "critical",
+            "duration": 4.5,
+            "zoom": 1.65,
+            "connects_to": ["m8", "m9", "m10", "m11", "m12"],
+            "data_points": [
+                {"label": "Core Output", "value": "1.44 TW", "status": "optimal"},
+                {"label": "Singularity Radius", "value": "0.82 m", "status": "stable"},
+                {"label": "Event Horizon Flux", "value": "Stable", "status": "optimal"}
+            ]
         },
         {
             "id": "m8",
-            "x": 85,
-            "y": 35,
-            "label": "Biometric Resonance",
-            "description": "Displays the resonance wave frequency between the bio-engine and the organic hull.",
-            "category": "critical",
-            "duration": 3.5,
+            "x": 38,
+            "y": 40,
+            "label": "Ancient Inscribed Runic Rings",
+            "description": "Three concentric gyroscopic rings carved from metamaterial stone and bone. Glowing engraved runes dynamically stabilize the gravitational distortion.",
+            "category": "power",
+            "duration": 4.0,
+            "zoom": 1.5,
+            "connects_to": ["m7", "m9"],
             "data_points": [
-                {"label": "Stability", "value": "93.7%", "status": "stable"},
-                {"label": "Wave Output", "value": "Harmonic", "status": "optimal"}
+                {"label": "Spin Velocity", "value": "3,600 RPM", "status": "optimal"},
+                {"label": "Runic Charge", "value": "99.8%", "status": "optimal"},
+                {"label": "Magnetic Shear", "value": "0.02%", "status": "stable"}
             ]
         },
         {
             "id": "m9",
-            "x": 85,
-            "y": 65,
-            "label": "Soul-Drive Levels",
-            "description": "Telemetry of the active singularity containment field.",
-            "category": "power",
-            "duration": 3.5,
+            "x": 16,
+            "y": 45,
+            "label": "Translucent Bio-Cage Ribs",
+            "description": "Arched biological ribs composed of hardened chitin-glass composites. Forms a physical and psionic Faraday cage isolating the crew from extreme gravity waves.",
+            "category": "environment",
+            "duration": 3.2,
+            "zoom": 1.35,
+            "connects_to": ["m7", "m10"],
             "data_points": [
-                {"label": "Efficiency", "value": "89%", "status": "optimal"},
-                {"label": "Containment", "value": "Active", "status": "stable"}
+                {"label": "Tensile Strength", "value": "4.2 GPa", "status": "optimal"},
+                {"label": "Thermal Dissipation", "value": "99.1%", "status": "optimal"}
             ]
         },
         {
             "id": "m10",
-            "x": 25,
-            "y": 50,
-            "label": "Bio-Cage",
-            "description": "Rib-like translucent structures shielding the singularity from structural stress.",
-            "category": "environment",
-            "duration": 2.5,
-            "connects_to": ["m7"]
+            "x": 38,
+            "y": 82,
+            "label": "Engine Pedestal & Power Roots",
+            "description": "Petrified organic base housing root-like conduit arteries that channel liquid plasma directly into the ship's spinal cord.",
+            "category": "power",
+            "duration": 3.0,
+            "zoom": 1.35,
+            "connects_to": ["m7", "m9"],
+            "data_points": [
+                {"label": "Plasma Flow", "value": "2.8 kL/s", "status": "optimal"},
+                {"label": "Grounding Index", "value": "100%", "status": "optimal"}
+            ]
         },
         {
             "id": "m11",
-            "x": 50,
+            "x": 84,
             "y": 35,
-            "label": "Inscribed Rings",
-            "description": "Spinning gyroscopic rings featuring glowing ancestral runes that sequence energy patterns.",
-            "category": "system",
-            "duration": 3
+            "label": "HUD: Biometric Resonance",
+            "description": "Telemetry monitor visualizing the harmonic frequency coupling between the pilot's neural rhythm and the motor's core pulse.",
+            "category": "critical",
+            "duration": 4.0,
+            "zoom": 1.4,
+            "connects_to": ["m7", "m12"],
+            "data_points": [
+                {"label": "Resonance Stability", "value": "93.7%", "status": "stable"},
+                {"label": "Sine Wave Variance", "value": "0.04%", "status": "optimal"},
+                {"label": "Neural Entrainment", "value": "Active", "status": "optimal"}
+            ]
         },
         {
             "id": "m12",
+            "x": 84,
+            "y": 68,
+            "label": "HUD: Soul-Drive Levels",
+            "description": "Real-time equalizer bars measuring the active singularity containment threshold and psionic drive efficiency.",
+            "category": "power",
+            "duration": 4.0,
+            "zoom": 1.4,
+            "connects_to": ["m11", "m7"],
+            "data_points": [
+                {"label": "Drive Efficiency", "value": "89%", "status": "optimal"},
+                {"label": "Singularity Containment", "value": "Active", "status": "stable"},
+                {"label": "Dark Matter Fuel", "value": "78.4%", "status": "optimal"}
+            ]
+        },
+        {
+            "id": "m13",
             "x": 90,
-            "y": 88,
-            "label": "Variant Pagination",
-            "description": "Variant 2 of 3. Proceed to the next module in sequence.",
+            "y": 89,
+            "label": "Sequence: Variant 2/3",
+            "description": "Stepping indicator: Current view is 2 of 3 in the Living Craft anatomy sequence. Next: The Neural Bridge.",
             "category": "navigation",
-            "duration": 2
+            "duration": 2.2,
+            "connects_to": ["m12"]
         }
     ]
 }

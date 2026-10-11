@@ -4,66 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Organic Craft - The Neural Bridge</title>
-    <!-- Custom Web Fonts for Premium Look -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <title>Organic Craft - Living Telemetry Nexus</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;600;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- GSAP CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <style>
         :root {
             /* Structural Variables */
-            --sidebar-width: 350px;
-            --glass-blur: blur(20px);
+            --sidebar-width: 390px;
+            --glass-blur: blur(24px);
             --border-radius-lg: 16px;
-            --border-radius-sm: 8px;
+            --border-radius-md: 10px;
+            --border-radius-sm: 6px;
             --transition-speed: 0.3s;
 
             /* Base Dark Mode Settings */
             --text-primary: #ffffff;
-            --text-secondary: #a0aab5;
-            --bg-base: #050505;
+            --text-secondary: #9aa8b6;
+            --text-muted: #5e6c7c;
+            --bg-base: #04060a;
             
-            /* Theme 1: Default (Neural Bridge) */
+            /* Theme 1: Default (Neural Bridge - Cyan) */
             --accent-main: #00f2ff;
-            --accent-glow: rgba(0, 242, 255, 0.4);
-            --panel-bg: rgba(10, 15, 25, 0.65);
-            --panel-border: rgba(0, 242, 255, 0.2);
+            --accent-glow: rgba(0, 242, 255, 0.45);
+            --panel-bg: rgba(8, 14, 24, 0.74);
+            --panel-border: rgba(0, 242, 255, 0.22);
             --marker-border-style: solid;
             
             /* Category Colors */
-            --cat-system: #00f2ff;     /* Cyan */
-            --cat-critical: #ff3333;   /* Red */
-            --cat-environment: #cc00ff; /* Purple */
-            --cat-power: #ffcc00;      /* Yellow */
-            --cat-navigation: #00ff66; /* Green */
+            --cat-system: #00f2ff;       /* Cyan */
+            --cat-critical: #ff3344;     /* Crimson */
+            --cat-environment: #c344ff;  /* Violet */
+            --cat-power: #ffb700;        /* Solar Amber */
+            --cat-navigation: #00ff88;   /* Hyper Emerald */
         }
 
-        /* Theme 2: Bio-Hazard Event */
+        /* Theme: Solar Singularity (Gold) */
+        body.theme-solar {
+            --accent-main: #ffcc00;
+            --accent-glow: rgba(255, 204, 0, 0.5);
+            --panel-bg: rgba(24, 18, 6, 0.78);
+            --panel-border: rgba(255, 204, 0, 0.26);
+            --cat-system: #ffd700;
+        }
+
+        /* Theme: Bio-Hazard (Crimson) */
         body.theme-danger {
             --accent-main: #ff3300;
-            --accent-glow: rgba(255, 51, 0, 0.4);
-            --panel-bg: rgba(25, 5, 5, 0.65);
-            --panel-border: rgba(255, 51, 0, 0.2);
-            --marker-border-style: solid;
+            --accent-glow: rgba(255, 51, 0, 0.5);
+            --panel-bg: rgba(26, 6, 6, 0.78);
+            --panel-border: rgba(255, 51, 0, 0.26);
             --cat-system: #ff6600;
         }
 
-        /* Theme 3: Void Matrix */
+        /* Theme: Void Matrix (Terminal Green) */
         body.theme-hacker {
-            --accent-main: #00ff00;
-            --accent-glow: rgba(0, 255, 0, 0.4);
-            --panel-bg: rgba(5, 20, 5, 0.65);
-            --panel-border: rgba(0, 255, 0, 0.2);
-            --marker-border-style: dashed;
-            font-family: 'Courier New', Courier, monospace !important;
+            --accent-main: #00ff66;
+            --accent-glow: rgba(0, 255, 102, 0.45);
+            --panel-bg: rgba(4, 20, 10, 0.8);
+            --panel-border: rgba(0, 255, 102, 0.26);
+            font-family: 'JetBrains Mono', monospace !important;
         }
 
-        /* Theme 4: Quantum Core */
+        /* Theme: Quantum Core (Monochrome Luxe) */
         body.theme-quantum {
-            --accent-main: #ffffff;
-            --accent-glow: rgba(255, 255, 255, 0.3);
-            --panel-bg: rgba(15, 15, 15, 0.85);
-            --panel-border: rgba(255, 255, 255, 0.1);
-            --marker-border-style: solid;
+            --accent-main: #f0f4f8;
+            --accent-glow: rgba(255, 255, 255, 0.35);
+            --panel-bg: rgba(14, 16, 20, 0.85);
+            --panel-border: rgba(255, 255, 255, 0.16);
             --bg-base: #000000;
         }
 
@@ -79,26 +90,60 @@
             font-family: 'Inter', sans-serif;
             display: flex;
             height: 100vh;
+            width: 100vw;
             overflow: hidden;
             transition: background-color var(--transition-speed);
+            user-select: none;
         }
 
+        /* Ambient Dynamic Glow */
         #ambient-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: radial-gradient(circle at 50% 50%, var(--accent-glow) 0%, transparent 60%);
-            opacity: 0.15;
+            background: radial-gradient(circle at 55% 50%, var(--accent-glow) 0%, transparent 65%);
+            opacity: 0.28;
             z-index: 0;
+            pointer-events: none;
+            transition: background 0.8s ease, opacity 0.8s ease;
+        }
+
+        /* Canvas Particle Layer */
+        #fx-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
             pointer-events: none;
         }
 
+        /* Scanlines & CRT FX Overlay */
+        #crt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 4;
+            pointer-events: none;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.28) 50%),
+                        radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.72) 100%);
+            background-size: 100% 4px, 100% 100%;
+            opacity: 0.55;
+            transition: opacity var(--transition-speed);
+        }
+        body.no-scanlines #crt-overlay { opacity: 0; }
+
+        /* ================= SIDEBAR ================= */
         #sidebar {
             position: relative;
-            z-index: 10;
+            z-index: 15;
             width: var(--sidebar-width);
+            min-width: var(--sidebar-width);
             height: 100vh;
             background: var(--panel-bg);
             backdrop-filter: var(--glass-blur);
@@ -106,47 +151,177 @@
             border-right: 1px solid var(--panel-border);
             display: flex;
             flex-direction: column;
-            padding: 2rem 1.5rem;
-            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
+            padding: 1.4rem 1.3rem;
+            box-shadow: 10px 0 35px rgba(0, 0, 0, 0.7);
             overflow-y: auto;
         }
 
-        #sidebar::-webkit-scrollbar { width: 6px; }
-        #sidebar::-webkit-scrollbar-track { background: transparent; }
-        #sidebar::-webkit-scrollbar-thumb { background: var(--panel-border); border-radius: 3px; }
+        #sidebar::-webkit-scrollbar { width: 5px; }
+        #sidebar::-webkit-scrollbar-thumb { background: var(--panel-border); border-radius: 4px; }
 
-        .brand-header { margin-bottom: 2.5rem; }
+        .brand-header {
+            margin-bottom: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            border-bottom: 1px solid var(--panel-border);
+            padding-bottom: 1rem;
+        }
+
+        .brand-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
         .brand-header h1 {
             font-family: 'Orbitron', sans-serif;
             font-weight: 900;
-            font-size: 1.8rem;
+            font-size: 1.45rem;
             color: var(--accent-main);
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 10px var(--accent-glow);
-        }
-        .brand-header p {
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            line-height: 1.4;
+            text-shadow: 0 0 12px var(--accent-glow);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .control-group {
-            margin-bottom: 2rem;
-            background: rgba(0, 0, 0, 0.2);
-            padding: 1.2rem;
+        .sound-toggle-btn {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--panel-border);
+            color: var(--accent-main);
+            width: 36px;
+            height: 36px;
             border-radius: var(--border-radius-sm);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
         }
+        .sound-toggle-btn:hover {
+            border-color: var(--accent-main);
+            box-shadow: 0 0 12px var(--accent-glow);
+            transform: scale(1.05);
+        }
+        .sound-toggle-btn.active { background: var(--accent-glow); color: #fff; }
+
+        .eq-bars { display: flex; align-items: flex-end; gap: 2px; height: 14px; }
+        .eq-bar { width: 3px; background: currentColor; border-radius: 1px; height: 4px; }
+        .sound-toggle-btn.active .eq-bar:nth-child(1) { animation: eqJump 0.8s infinite alternate ease-in-out; }
+        .sound-toggle-btn.active .eq-bar:nth-child(2) { animation: eqJump 0.6s infinite alternate ease-in-out 0.2s; }
+        .sound-toggle-btn.active .eq-bar:nth-child(3) { animation: eqJump 1s infinite alternate ease-in-out 0.4s; }
+        @keyframes eqJump { 0% { height: 3px; } 100% { height: 14px; } }
+
+        .control-group {
+            margin-bottom: 1.15rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.95rem;
+            border-radius: var(--border-radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
+        }
+
         .control-group label {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             color: var(--accent-main);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 0.8rem;
+            letter-spacing: 1.2px;
+            margin-bottom: 0.7rem;
+            font-weight: 700;
+        }
+
+        .control-badge {
+            background: rgba(0, 242, 255, 0.12);
+            color: var(--accent-main);
+            border: 1px solid var(--panel-border);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.62rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* 3 Main Organic Craft Presets */
+        .preset-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 7px;
+        }
+        .preset-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+            padding: 10px 12px;
+            border-radius: var(--border-radius-sm);
+            font-size: 0.82rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: 'Inter', sans-serif;
+        }
+        .preset-btn:hover {
+            border-color: var(--accent-main);
+            color: #fff;
+            background: rgba(0, 242, 255, 0.08);
+            transform: translateX(3px);
+        }
+        .preset-btn.active {
+            border-color: var(--accent-main);
+            background: var(--accent-glow);
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        /* Buttons & Inputs */
+        .btn {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.35);
+            color: var(--text-primary);
+            border: 1px solid var(--panel-border);
+            padding: 8px 12px;
+            border-radius: var(--border-radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .btn:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent-main);
+            box-shadow: 0 0 14px var(--accent-glow);
+            transform: translateY(-1px);
+        }
+        .btn-sm { padding: 6px 9px; font-size: 0.74rem; margin-bottom: 0; }
+        .btn-accent {
+            background: var(--accent-glow);
+            border-color: var(--accent-main);
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .btn-danger {
+            background: rgba(255, 51, 68, 0.25);
+            border-color: #ff3344;
+            color: #ff8899;
+        }
+        .btn-danger:hover {
+            background: rgba(255, 51, 68, 0.6);
+            box-shadow: 0 0 14px rgba(255, 51, 68, 0.6);
+            color: #fff;
         }
 
         .file-upload-wrapper {
@@ -155,70 +330,203 @@
             display: inline-block;
             width: 100%;
         }
-        .btn {
-            width: 100%;
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--panel-border);
-            padding: 10px 15px;
-            border-radius: var(--border-radius-sm);
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all var(--transition-speed);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-        .btn:hover {
-            background: var(--accent-glow);
-            border-color: var(--accent-main);
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
         input[type="file"] {
             font-size: 100px;
             position: absolute;
-            left: 0; top: 0; opacity: 0;
-            cursor: pointer; height: 100%;
+            left: 0; top: 0; opacity: 0; cursor: pointer;
+            height: 100%; width: 100%;
         }
 
-        select {
+        select, input[type="text"], input[type="number"], textarea {
             width: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.55);
             color: var(--text-primary);
             border: 1px solid var(--panel-border);
-            padding: 10px;
+            padding: 8px 10px;
             border-radius: var(--border-radius-sm);
             font-family: 'Inter', sans-serif;
-            outline: none; cursor: pointer;
-            appearance: none;
+            font-size: 0.82rem;
+            outline: none;
+            transition: border-color 0.2s;
         }
-        select:focus { border-color: var(--accent-main); }
-        .playback-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .playback-controls .btn-full { grid-column: span 2; }
+        select:focus, input:focus, textarea:focus {
+            border-color: var(--accent-main);
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
 
+        .toggle-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 7px;
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+        }
+
+        /* Exploration Mode Tabs */
+        .tab-row {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 8px;
+            background: rgba(0,0,0,0.3);
+            padding: 3px;
+            border-radius: var(--border-radius-sm);
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 6px 4px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 0.72rem;
+            font-family: 'Orbitron', sans-serif;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .tab-btn.active {
+            background: var(--accent-glow);
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 0 0 8px var(--accent-glow);
+        }
+
+        /* Marker Directory / List */
+        .marker-index-container {
+            max-height: 180px;
+            overflow-y: auto;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--border-radius-sm);
+            background: rgba(0,0,0,0.4);
+            padding: 4px;
+            margin-top: 6px;
+        }
+        .marker-index-container::-webkit-scrollbar { width: 4px; }
+        .marker-index-container::-webkit-scrollbar-thumb { background: var(--panel-border); }
+
+        .marker-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            margin-bottom: 2px;
+        }
+        .marker-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            transform: translateX(2px);
+        }
+        .marker-item.active {
+            background: rgba(0, 242, 255, 0.15);
+            color: var(--accent-main);
+            border-left: 3px solid var(--accent-main);
+        }
+        .marker-cat-badge {
+            font-size: 0.6rem;
+            padding: 1px 5px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        /* Status Footer */
+        #status-indicator {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--panel-border);
+            padding-top: 0.9rem;
+        }
+        .status-left { display: flex; align-items: center; gap: 8px; }
+        .status-dot {
+            width: 8px; height: 8px;
+            background: var(--accent-main);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-main);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.4; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.15); box-shadow: 0 0 14px var(--accent-main); }
+            100% { opacity: 0.4; transform: scale(0.9); }
+        }
+
+        /* ================= MAIN STAGE ================= */
         #main-stage {
             position: relative;
             flex: 1;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            z-index: 1;
+            justify-content: space-between;
+            padding: 0.6rem 1.6rem;
+            z-index: 10;
+            overflow: hidden;
+            gap: 8px;
+        }
+
+        /* Top HUD Bar (Outside Image Above) */
+        .hud-top-bar {
+            position: relative;
+            width: 100%;
+            max-width: 1560px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 12;
+            flex-shrink: 0;
+            padding: 2px 4px;
         }
 
         #visual-wrapper {
             width: 100%;
-            max-width: 1600px;
+            max-width: 1560px;
+            flex: 1;
+            min-height: 0;
             aspect-ratio: 16 / 9;
             position: relative;
             border-radius: var(--border-radius-lg);
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--panel-border);
+            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.95), 0 0 0 1px var(--panel-border);
             background: #000;
+            perspective: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Creator Mode Banner */
+        #creator-mode-banner {
+            background: rgba(255, 183, 0, 0.9);
+            color: #000;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            padding: 4px 14px;
+            border-radius: 20px;
+            z-index: 30;
+            box-shadow: 0 0 20px rgba(255, 183, 0, 0.6);
+            display: none;
+            align-items: center;
+            gap: 8px;
+            pointer-events: none;
+            flex-shrink: 0;
+        }
+        body.mode-creator #creator-mode-banner { display: flex; }
+        body.mode-creator #visual-wrapper {
+            box-shadow: 0 0 0 2px #ffb700, 0 25px 60px rgba(0, 0, 0, 0.95);
+            cursor: crosshair;
         }
 
         #container {
@@ -228,40 +536,100 @@
             background-position: center;
             background-repeat: no-repeat;
             position: relative;
-            /* Container will scale for zoom effects */
             transform-origin: 50% 50%;
+            transition: transform 0.1s cubic-bezier(0.2, 0, 0, 1);
+            will-change: transform;
+        }
+        .hud-telemetry-tag {
+            font-family: 'JetBrains Mono', 'Orbitron', monospace;
+            font-size: 0.72rem;
+            color: var(--accent-main);
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--panel-border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: 1px;
         }
 
+        /* Quick Frame Pills in Top HUD */
+        .hud-frame-pills {
+            display: flex;
+            gap: 6px;
+            pointer-events: auto;
+        }
+        .hud-frame-pill {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--panel-border);
+            color: var(--text-secondary);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.68rem;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .hud-frame-pill:hover { border-color: var(--accent-main); color: #fff; }
+        .hud-frame-pill.active {
+            background: var(--accent-glow);
+            border-color: var(--accent-main);
+            color: #fff;
+            font-weight: 700;
+        }
+
+        /* Target Reticle */
+        #hud-crosshair {
+            position: absolute;
+            pointer-events: none;
+            width: 40px;
+            height: 40px;
+            transform: translate(-50%, -50%);
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        #hud-crosshair::before, #hud-crosshair::after {
+            content: '';
+            position: absolute;
+            background: var(--accent-main);
+            box-shadow: 0 0 6px var(--accent-main);
+        }
+        #hud-crosshair::before { top: 50%; left: 0; width: 100%; height: 1px; transform: translateY(-50%); }
+        #hud-crosshair::after { left: 50%; top: 0; height: 100%; width: 1px; transform: translateX(-50%); }
+        #visual-wrapper:hover #hud-crosshair { opacity: 0.65; }
+
+        /* SVG Neural Links */
         #svg-lines {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 5;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 5;
         }
-        
-        /* Neural Link Styling */
         .neural-link {
-            stroke-width: 2;
+            stroke-width: 2.2;
             fill: none;
-            opacity: 0.7;
+            opacity: 0.8;
             stroke-dasharray: 100;
             stroke-dashoffset: 100;
-            filter: drop-shadow(0 0 4px currentColor);
+            filter: drop-shadow(0 0 6px currentColor);
+            transition: opacity 0.3s, stroke-width 0.3s;
         }
 
+        /* ================= MARKER ELEMENT ================= */
         .marker-group {
             position: absolute;
             z-index: 10;
             transform: translate(-50%, -50%);
             pointer-events: none;
+            will-change: transform, opacity;
         }
 
-        /* Marker Color Modifiers based on category */
         .marker {
-            width: 30px;
-            height: 30px;
-            background: rgba(0, 0, 0, 0.5);
+            width: 32px;
+            height: 32px;
+            background: rgba(4, 8, 16, 0.65);
             border: 2px var(--marker-border-style) var(--accent-main);
             border-radius: 50%;
             display: flex;
@@ -269,10 +637,10 @@
             justify-content: center;
             box-shadow: 0 0 20px var(--accent-glow);
             pointer-events: auto;
-            cursor: crosshair;
+            cursor: pointer;
             position: relative;
-            backdrop-filter: blur(4px);
-            transition: transform 0.2s ease, background 0.2s ease;
+            backdrop-filter: blur(5px);
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, box-shadow 0.2s ease;
         }
         
         .marker::after {
@@ -280,66 +648,78 @@
             width: 8px; height: 8px;
             background: var(--accent-main);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--accent-main);
+            box-shadow: 0 0 10px var(--accent-main);
+            transition: transform 0.2s;
         }
 
-        /* Classes assigned dynamically for categories */
-        .cat-critical { border-color: var(--cat-critical); box-shadow: 0 0 20px rgba(255, 51, 51, 0.4); }
-        .cat-critical::after { background: var(--cat-critical); box-shadow: 0 0 8px var(--cat-critical); }
-        
-        .cat-power { border-color: var(--cat-power); box-shadow: 0 0 20px rgba(255, 204, 0, 0.4); }
-        .cat-power::after { background: var(--cat-power); box-shadow: 0 0 8px var(--cat-power); }
-        
-        .cat-environment { border-color: var(--cat-environment); box-shadow: 0 0 20px rgba(204, 0, 255, 0.4); }
-        .cat-environment::after { background: var(--cat-environment); box-shadow: 0 0 8px var(--cat-environment); }
-        
-        .cat-navigation { border-color: var(--cat-navigation); box-shadow: 0 0 20px rgba(0, 255, 102, 0.4); }
-        .cat-navigation::after { background: var(--cat-navigation); box-shadow: 0 0 8px var(--cat-navigation); }
+        /* Category Color Assignments */
+        .cat-critical { border-color: var(--cat-critical) !important; box-shadow: 0 0 20px rgba(255, 51, 68, 0.5) !important; }
+        .cat-critical::after { background: var(--cat-critical) !important; box-shadow: 0 0 10px var(--cat-critical) !important; }
+        .cat-power { border-color: var(--cat-power) !important; box-shadow: 0 0 20px rgba(255, 183, 0, 0.5) !important; }
+        .cat-power::after { background: var(--cat-power) !important; box-shadow: 0 0 10px var(--cat-power) !important; }
+        .cat-environment { border-color: var(--cat-environment) !important; box-shadow: 0 0 20px rgba(195, 68, 255, 0.5) !important; }
+        .cat-environment::after { background: var(--cat-environment) !important; box-shadow: 0 0 10px var(--cat-environment) !important; }
+        .cat-navigation { border-color: var(--cat-navigation) !important; box-shadow: 0 0 20px rgba(0, 255, 136, 0.5) !important; }
+        .cat-navigation::after { background: var(--cat-navigation) !important; box-shadow: 0 0 10px var(--cat-navigation) !important; }
+        .cat-system { border-color: var(--cat-system) !important; box-shadow: 0 0 20px rgba(0, 242, 255, 0.5) !important; }
+        .cat-system::after { background: var(--cat-system) !important; box-shadow: 0 0 10px var(--cat-system) !important; }
 
-        .cat-system { border-color: var(--cat-system); box-shadow: 0 0 20px rgba(0, 242, 255, 0.4); }
-        .cat-system::after { background: var(--cat-system); box-shadow: 0 0 8px var(--cat-system); }
+        .marker:hover { transform: scale(1.35); }
+        body.mode-creator .marker {
+            cursor: move;
+            border-style: dashed !important;
+        }
 
-        .marker:hover { transform: scale(1.2); }
+        .marker-radar {
+            position: absolute;
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            border: 1px dashed var(--accent-main);
+            opacity: 0.4;
+            animation: radarSpin 6s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes radarSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
         .marker-pulse {
             position: absolute;
-            width: 60px; height: 60px;
+            width: 64px; height: 64px;
             border-radius: 50%;
-            border: 1px solid var(--accent-main);
+            border: 1.5px solid var(--accent-main);
             opacity: 0;
+            pointer-events: none;
         }
 
+        /* ================= INFO CARD ================= */
         .info-card {
             position: absolute;
             background: var(--panel-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             color: var(--text-primary);
-            padding: 1.2rem;
+            padding: 1.3rem;
             border: 1px solid var(--panel-border);
-            border-radius: var(--border-radius-sm);
-            width: 300px;
-            opacity: 0; z-index: 11;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            pointer-events: none;
+            border-radius: var(--border-radius-md);
+            width: 320px;
+            opacity: 0;
+            z-index: 14;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75), 0 0 25px rgba(0, 0, 0, 0.5);
+            pointer-events: auto;
+            transition: border-color 0.3s;
         }
-
-        .info-card.right { left: 50px; top: -20px; border-left: 4px solid var(--accent-main); }
-        .info-card.left { right: 50px; top: -20px; border-right: 4px solid var(--accent-main); }
+        .info-card.right { left: 45px; top: -20px; border-left: 4px solid var(--accent-main); }
+        .info-card.left { right: 45px; top: -20px; border-right: 4px solid var(--accent-main); }
+        .info-card.bottom-align { top: auto !important; bottom: -20px !important; }
         
-        /* Category specific card borders */
-        .info-card.right.cat-critical { border-left-color: var(--cat-critical); }
-        .info-card.left.cat-critical { border-right-color: var(--cat-critical); }
-        .info-card.right.cat-power { border-left-color: var(--cat-power); }
-        .info-card.left.cat-power { border-right-color: var(--cat-power); }
-        .info-card.right.cat-environment { border-left-color: var(--cat-environment); }
-        .info-card.left.cat-environment { border-right-color: var(--cat-environment); }
-        .info-card.right.cat-navigation { border-left-color: var(--cat-navigation); }
-        .info-card.left.cat-navigation { border-right-color: var(--cat-navigation); }
+        .info-card.cat-critical { border-left-color: var(--cat-critical) !important; border-right-color: var(--cat-critical) !important; }
+        .info-card.cat-power { border-left-color: var(--cat-power) !important; border-right-color: var(--cat-power) !important; }
+        .info-card.cat-environment { border-left-color: var(--cat-environment) !important; border-right-color: var(--cat-environment) !important; }
+        .info-card.cat-navigation { border-left-color: var(--cat-navigation) !important; border-right-color: var(--cat-navigation) !important; }
         
         .info-card h3 {
             font-family: 'Orbitron', sans-serif;
             margin: 0 0 0.5rem 0;
-            font-size: 1rem;
+            font-size: 0.96rem;
             color: var(--accent-main);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -347,11 +727,9 @@
         }
         .info-card h3::before {
             content: ''; display: inline-block;
-            width: 8px; height: 8px;
-            background: var(--accent-main);
-            border-radius: 2px;
+            width: 8px; height: 8px; background: var(--accent-main);
+            border-radius: 2px; box-shadow: 0 0 6px var(--accent-main);
         }
-        /* Dynamic Header Dots based on category */
         .info-card.cat-critical h3 { color: var(--cat-critical); }
         .info-card.cat-critical h3::before { background: var(--cat-critical); }
         .info-card.cat-power h3 { color: var(--cat-power); }
@@ -362,158 +740,1348 @@
         .info-card.cat-navigation h3::before { background: var(--cat-navigation); }
 
         .info-card p {
-            margin: 0 0 1rem 0;
-            font-size: 0.85rem;
-            line-height: 1.6;
+            margin: 0 0 0.9rem 0;
+            font-size: 0.83rem;
+            line-height: 1.55;
             color: var(--text-secondary);
         }
         
-        /* Telemetry Data Points inside Card */
         .telemetry-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+            display: flex; flex-direction: column; gap: 6px;
             border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 10px;
+            padding-top: 9px;
         }
         .telemetry-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.8rem;
-            font-family: 'Orbitron', monospace;
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.78rem; font-family: 'JetBrains Mono', 'Orbitron', monospace;
         }
-        .telemetry-label { color: var(--text-secondary); }
-        .telemetry-value { font-weight: bold; color: var(--text-primary); }
-        .status-optimal { color: #00ff66; text-shadow: 0 0 5px #00ff66; }
-        .status-warning { color: #ffcc00; text-shadow: 0 0 5px #ffcc00; }
-        .status-stable { color: #00f2ff; text-shadow: 0 0 5px #00f2ff; }
+        .telemetry-label { color: var(--text-secondary); font-size: 0.74rem; }
+        .telemetry-value { font-weight: 700; color: var(--text-primary); }
+        .status-optimal { color: #00ff88; text-shadow: 0 0 6px #00ff88; }
+        .status-warning { color: #ffb700; text-shadow: 0 0 6px #ffb700; }
+        .status-stable { color: #00f2ff; text-shadow: 0 0 6px #00f2ff; }
+        .status-critical { color: #ff3344; text-shadow: 0 0 6px #ff3344; }
         
         .info-card .frame-id {
-            position: absolute;
-            top: 5px; right: 10px;
+            position: absolute; top: 8px; right: 12px;
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.6rem;
-            color: var(--accent-main);
-            opacity: 0.5;
+            font-size: 0.65rem; color: var(--accent-main); opacity: 0.6;
         }
 
-        #loader {
-            position: fixed; top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background: var(--bg-base); z-index: 9999;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            color: var(--accent-main);
+        /* ================= BOTTOM TIMELINE SCRUBBER HUD ================= */
+        #hud-timeline {
+            position: relative;
+            width: 100%;
+            max-width: 1560px;
+            background: rgba(8, 14, 24, 0.85);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--panel-border);
+            border-radius: var(--border-radius-md);
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            z-index: 15;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.85);
+            flex-shrink: 0;
+        }
+
+        .timeline-controls { display: flex; align-items: center; gap: 8px; }
+        .hud-icon-btn {
+            background: transparent;
+            border: 1px solid var(--panel-border);
+            color: var(--text-primary);
+            width: 34px; height: 34px;
+            border-radius: var(--border-radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.2s; font-size: 0.85rem;
+        }
+        .hud-icon-btn:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent-main);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+        .hud-icon-btn.active {
+            background: var(--accent-glow);
+            border-color: var(--accent-main);
+            color: #fff;
+        }
+
+        .timeline-bar-wrapper { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+        .timeline-info-row {
+            display: flex; justify-content: space-between;
+            font-size: 0.72rem; font-family: 'JetBrains Mono', monospace;
+            color: var(--text-secondary);
+        }
+
+        .timeline-track {
+            position: relative; height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px; cursor: pointer;
+        }
+        .timeline-progress {
+            height: 100%; width: 0%;
+            background: var(--accent-main);
+            border-radius: 4px;
+            box-shadow: 0 0 8px var(--accent-main);
+            transition: width 0.1s linear;
+        }
+        .timeline-pips {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+        }
+        .timeline-pip {
+            position: absolute; top: -2px; width: 12px; height: 12px;
+            border-radius: 50%; background: rgba(255, 255, 255, 0.4);
+            border: 2px solid #000; transform: translateX(-50%);
+            pointer-events: auto; cursor: pointer; transition: all 0.2s;
+        }
+        .timeline-pip:hover, .timeline-pip.active {
+            background: var(--accent-main);
+            box-shadow: 0 0 8px var(--accent-main);
+            transform: translateX(-50%) scale(1.35);
+        }
+
+        .speed-selector {
+            display: flex; gap: 2px;
+            background: rgba(0,0,0,0.4); padding: 2px;
+            border-radius: 4px; border: 1px solid var(--panel-border);
+        }
+        .speed-btn {
+            background: transparent; border: none;
+            color: var(--text-secondary); font-size: 0.68rem;
+            padding: 3px 6px; border-radius: 3px; cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .speed-btn.active { background: var(--accent-glow); color: #fff; font-weight: 700; }
+
+        /* ================= EXPANDED CREATOR / EDIT MODAL ================= */
+        #creator-modal {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: var(--panel-bg);
+            backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--accent-main);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.95), 0 0 30px var(--accent-glow);
+            border-radius: var(--border-radius-lg);
+            padding: 1.6rem;
+            width: 480px;
+            max-height: 90vh;
+            overflow-y: auto;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        #creator-modal.active {
+            opacity: 1; pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        #creator-modal h2 {
             font-family: 'Orbitron', sans-serif;
+            font-size: 1.15rem; color: var(--accent-main);
+            margin-bottom: 0.9rem; letter-spacing: 1px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-field { margin-bottom: 0.8rem; }
+        .modal-field label {
+            display: block; font-size: 0.72rem; color: var(--text-secondary);
+            margin-bottom: 3px; font-family: 'Orbitron', sans-serif;
+        }
+
+        .data-point-row {
+            display: grid; grid-template-columns: 1.4fr 1.2fr 1fr 30px;
+            gap: 6px; align-items: center; margin-bottom: 6px;
+        }
+        .btn-remove-dp {
+            background: rgba(255, 51, 68, 0.2); border: 1px solid #ff3344;
+            color: #ff3344; height: 32px; border-radius: 4px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .modal-actions {
+            display: flex; gap: 8px; margin-top: 1.2rem;
+            border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1rem;
+        }
+
+        /* Toast notification */
+        #toast-notice {
+            position: fixed; bottom: 25px; right: 25px;
+            background: rgba(0, 242, 255, 0.9); color: #000;
+            padding: 8px 16px; border-radius: 6px;
+            font-family: 'Orbitron', sans-serif; font-size: 0.78rem; font-weight: 700;
+            z-index: 99999; opacity: 0; transform: translateY(10px);
+            transition: all 0.3s ease; pointer-events: none;
+        }
+        #toast-notice.show { opacity: 1; transform: translateY(0); }
+
+        /* LOADER */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--bg-base); z-index: 99999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: var(--accent-main); font-family: 'Orbitron', sans-serif;
             transition: opacity 0.8s ease;
         }
         .spinner {
-            width: 50px; height: 50px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
+            width: 55px; height: 55px;
+            border: 3px solid rgba(255, 255, 255, 0.08);
             border-top: 3px solid var(--accent-main);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            border-radius: 50%; animation: spin 0.9s linear infinite;
+            margin-bottom: 22px; box-shadow: 0 0 20px var(--accent-glow);
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        #status-indicator {
-            margin-top: auto;
-            display: flex; align-items: center; gap: 10px;
-            font-size: 0.8rem; color: var(--text-secondary);
-        }
-        .status-dot {
-            width: 8px; height: 8px;
-            background: var(--accent-main); border-radius: 50%;
-            box-shadow: 0 0 8px var(--accent-main);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 0.5; box-shadow: 0 0 0 rgba(0,242,255,0); }
-            50% { opacity: 1; box-shadow: 0 0 10px var(--accent-main); }
-            100% { opacity: 0.5; box-shadow: 0 0 0 rgba(0,242,255,0); }
-        }
     </style>
 </head>
 
 <body>
     <div id="ambient-bg"></div>
-    <div id="loader"><div class="spinner"></div><div id="loader-text">INITIALIZING NEURAL LINK...</div></div>
+    <canvas id="fx-canvas"></canvas>
+    <div id="crt-overlay"></div>
+    <div id="toast-notice">Schema Exported!</div>
 
+    <div id="loader">
+        <div class="spinner"></div>
+        <div id="loader-text" style="letter-spacing: 2px; font-size: 0.9rem;">INITIALIZING NEURAL TELEMETRY LINK...</div>
+    </div>
+
+    <!-- SIDEBAR -->
     <aside id="sidebar">
         <div class="brand-header">
-            <h1>Organic Craft</h1>
-            <p>Advanced Biomechanical Telemetry & Visual Analyzer. Connected to Neural Bridge.</p>
+            <div class="brand-top">
+                <h1>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24M14.83 9.17l4.24-4.24M14.83 14.83l4.24 4.24M9.17 14.83l-4.24 4.24"/></svg>
+                    Organic Craft
+                </h1>
+                <button class="sound-toggle-btn active" id="btnSoundToggle" title="Audio Synth FX (M)">
+                    <div class="eq-bars">
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                        <div class="eq-bar"></div>
+                    </div>
+                </button>
+            </div>
+            <p id="brand-scene-desc">Living Organic Spacecraft Telemetry & Neural Marker Nexus.</p>
         </div>
 
+        <!-- 1. ORGANIC CRAFT 3 FRAMES -->
         <div class="control-group">
-            <label>1. Telemetry Source</label>
-            <div class="file-upload-wrapper">
-                <button class="btn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
-                    Upload Image
+            <label>
+                <span>1. Living Craft Frames</span>
+                <span class="control-badge">3 SCENES</span>
+            </label>
+            <div class="preset-grid">
+                <button class="preset-btn active" data-preset="frame1">
+                    <span>🌌 Frame 1: Celestial Leviathan</span>
+                    <span style="font-size: 0.68rem; opacity: 0.65;">EXTERIOR</span>
                 </button>
-                <input type="file" id="imageUpload" accept="image/*">
+                <button class="preset-btn" data-preset="frame2">
+                    <span>⚛️ Frame 2: The Heart (Motor)</span>
+                    <span style="font-size: 0.68rem; opacity: 0.65;">CORE</span>
+                </button>
+                <button class="preset-btn" data-preset="frame3">
+                    <span>🧠 Frame 3: The Neural Bridge</span>
+                    <span style="font-size: 0.68rem; opacity: 0.65;">SANCTUARY</span>
+                </button>
             </div>
-            <div class="file-upload-wrapper">
-                <button class="btn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-                    Upload JSON
-                </button>
-                <input type="file" id="jsonUpload" accept=".json">
+
+            <!-- Custom File Upload Toggle -->
+            <div style="display: flex; gap: 6px; margin-top: 8px;">
+                <div class="file-upload-wrapper">
+                    <button class="btn btn-sm">Image</button>
+                    <input type="file" id="imageUpload" accept="image/*">
+                </div>
+                <div class="file-upload-wrapper">
+                    <button class="btn btn-sm">JSON</button>
+                    <input type="file" id="jsonUpload" accept=".json">
+                </div>
             </div>
         </div>
 
+        <!-- 2. DISPLAY & CREATOR MODES -->
         <div class="control-group">
-            <label>2. UI Environment</label>
+            <label>
+                <span>2. Exploration & Editor</span>
+                <span class="control-badge">MODES</span>
+            </label>
+            <div class="tab-row">
+                <button class="tab-btn active" id="modeTourBtn">🎬 Tour Mode</button>
+                <button class="tab-btn" id="modeAllBtn">🌐 Show All</button>
+                <button class="tab-btn" id="modeCreatorBtn">🛠️ Creator Mode</button>
+            </div>
+            <div class="toggle-row">
+                <span>Auto-Loop Sequence</span>
+                <input type="checkbox" id="loopToggle" checked style="accent-color: var(--accent-main); cursor: pointer;">
+            </div>
+            <div class="toggle-row">
+                <span>CRT Scanlines & FX</span>
+                <input type="checkbox" id="scanlineToggle" checked style="accent-color: var(--accent-main); cursor: pointer;">
+            </div>
+            <div class="toggle-row">
+                <span>3D Parallax Tilt</span>
+                <input type="checkbox" id="parallaxToggle" checked style="accent-color: var(--accent-main); cursor: pointer;">
+            </div>
+        </div>
+
+        <!-- 3. ATMOSPHERE THEMES -->
+        <div class="control-group">
+            <label>
+                <span>3. UI Atmosphere</span>
+                <span class="control-badge">THEME</span>
+            </label>
             <select id="themeSelect">
-                <option value="default">Neural Bridge (Cyan)</option>
-                <option value="danger">Bio-Hazard (Crimson)</option>
-                <option value="hacker">Void Matrix (Terminal)</option>
-                <option value="quantum">Quantum Core (Monochrome)</option>
+                <option value="solar">Solar Singularity (Golden Amber)</option>
+                <option value="default">Neural Bridge (Cyan Glow)</option>
+                <option value="danger">Bio-Hazard (Crimson Alert)</option>
+                <option value="hacker">Void Matrix (Terminal Green)</option>
+                <option value="quantum">Quantum Core (Monochrome Luxe)</option>
             </select>
         </div>
 
-        <div class="control-group">
-            <label>3. Playback Sequence</label>
-            <div class="playback-controls">
-                <button class="btn" id="btnPlay">▶ Play</button>
-                <button class="btn" id="btnPause">⏸ Pause</button>
-                <button class="btn btn-full" id="btnRestart">🔄 Initialize Sequence</button>
+        <!-- 4. MARKER DIRECTORY / TELEMETRY INDEX -->
+        <div class="control-group" style="flex: 1; display: flex; flex-direction: column;">
+            <label>
+                <span>4. Telemetry Markers (<span id="markerCount">0</span>)</span>
+                <button id="btnNewMarkerTop" class="btn btn-sm btn-accent" style="width: auto; padding: 2px 8px; margin: 0;">+ Add</button>
+            </label>
+            <input type="text" id="markerSearchInput" placeholder="Filter telemetry markers..." style="font-size: 0.75rem; padding: 6px 8px; margin-bottom: 6px;">
+            <div class="marker-index-container" id="markerIndexList">
+                <!-- Dynamically Rendered -->
+            </div>
+            
+            <div style="display: flex; gap: 6px; margin-top: 8px;">
+                <button class="btn btn-sm btn-accent" id="btnExportJSON">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                    Export JSON
+                </button>
+                <button class="btn btn-sm" id="btnCopyJSON">Copy JSON</button>
             </div>
         </div>
 
         <div id="status-indicator">
-            <div class="status-dot"></div>
-            <span id="status-text">System Idle. Awaiting Data.</span>
+            <div class="status-left">
+                <div class="status-dot"></div>
+                <span id="status-text">Neural Link Synced.</span>
+            </div>
+            <span id="fps-counter" style="font-family: 'JetBrains Mono', monospace; opacity: 0.6;">60 FPS</span>
         </div>
     </aside>
 
+    <!-- MAIN VIEWPORT -->
     <main id="main-stage">
+        <!-- Top HUD Controls (Outside Image Above) -->
+        <div class="hud-top-bar">
+            <div class="hud-telemetry-tag" id="hudMissionTitle">
+                <span>MISSION // FRAME 1: CELESTIAL LEVIATHAN</span>
+            </div>
+
+            <!-- Quick Navigation Pills -->
+            <div class="hud-frame-pills">
+                <button class="hud-frame-pill active" data-preset="frame1">FRAME 1</button>
+                <button class="hud-frame-pill" data-preset="frame2">FRAME 2</button>
+                <button class="hud-frame-pill" data-preset="frame3">FRAME 3</button>
+            </div>
+
+            <div class="hud-telemetry-tag" id="hudCoords">
+                <span>X: 50.0%</span>
+                <span>Y: 50.0%</span>
+                <span id="hudZoomLabel">ZOOM: 1.0x</span>
+            </div>
+        </div>
+
+        <!-- Creator Mode Banner -->
+        <div id="creator-mode-banner">
+            <span>🛠️ CREATOR MODE ACTIVE:</span> Click canvas to place marker | Click marker to edit/delete | Drag to reposition
+        </div>
+
+        <!-- Pure Unobstructed Visual Stage -->
         <div id="visual-wrapper">
+            <!-- Target Reticle Cursor -->
+            <div id="hud-crosshair"></div>
+
+            <!-- Container for Image & Markers -->
             <div id="container">
                 <svg id="svg-lines"></svg>
             </div>
         </div>
+
+        <!-- Bottom Interactive Timeline Scrubber (Outside Image Below) -->
+        <div id="hud-timeline">
+            <div class="timeline-controls">
+                <button class="hud-icon-btn" id="btnPrev" title="Previous Marker (←)">⏮</button>
+                <button class="hud-icon-btn" id="btnPlayPause" title="Play Full Sequence (Space)">▶</button>
+                <button class="hud-icon-btn" id="btnNext" title="Next Marker (→)">⏭</button>
+                <button class="hud-icon-btn" id="btnResetView" title="Reset Camera View (R)">⌖</button>
+            </div>
+
+            <div class="timeline-bar-wrapper">
+                <div class="timeline-info-row">
+                    <span id="timelineCurrentStep">Marker 1 of 17</span>
+                    <span id="timelineSceneLabel">Celestial Leviathan</span>
+                </div>
+                <div class="timeline-track" id="timelineTrack">
+                    <div class="timeline-progress" id="timelineProgress"></div>
+                    <div class="timeline-pips" id="timelinePips"></div>
+                </div>
+            </div>
+
+            <div class="speed-selector">
+                <button class="speed-btn" data-speed="0.5">0.5x</button>
+                <button class="speed-btn active" data-speed="1.0">1.0x</button>
+                <button class="speed-btn" data-speed="1.5">1.5x</button>
+                <button class="speed-btn" data-speed="2.0">2.0x</button>
+            </div>
+
+            <button class="hud-icon-btn" id="btnFullscreen" title="Fullscreen (F)">⛶</button>
+        </div>
     </main>
 
+    <!-- EXPANDED CREATOR / EDIT MODAL -->
+    <div id="creator-modal">
+        <h2>
+            <span id="modalTitle">📍 Telemetry Marker Editor</span>
+            <span id="modalModeTag" style="font-size: 0.65rem; background: var(--accent-glow); padding: 2px 8px; border-radius: 4px;">CREATE</span>
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div class="modal-field">
+                <label>Marker ID</label>
+                <input type="text" id="markerInputId" placeholder="e.g. m1">
+            </div>
+            <div class="modal-field">
+                <label>Category</label>
+                <select id="markerInputCategory">
+                    <option value="system">System (Cyan)</option>
+                    <option value="critical">Critical (Crimson)</option>
+                    <option value="power">Power (Amber)</option>
+                    <option value="navigation">Navigation (Emerald)</option>
+                    <option value="environment">Environment (Violet)</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div class="modal-field">
+                <label>X Position (%)</label>
+                <input type="number" id="markerInputX" min="0" max="100" step="0.5">
+            </div>
+            <div class="modal-field">
+                <label>Y Position (%)</label>
+                <input type="number" id="markerInputY" min="0" max="100" step="0.5">
+            </div>
+        </div>
+
+        <div class="modal-field">
+            <label>Label / Title</label>
+            <input type="text" id="markerInputLabel" placeholder="e.g. Singularity Core Conduit">
+        </div>
+
+        <div class="modal-field">
+            <label>Technical Description</label>
+            <textarea id="markerInputDesc" rows="2" placeholder="Telemetry analysis notes..."></textarea>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div class="modal-field">
+                <label>Duration (Seconds)</label>
+                <input type="number" id="markerInputDuration" value="3.0" min="1" max="10" step="0.5">
+            </div>
+            <div class="modal-field">
+                <label>Camera Zoom Level</label>
+                <input type="number" id="markerInputZoom" value="1.3" min="1.0" max="2.5" step="0.1">
+            </div>
+        </div>
+
+        <div class="modal-field">
+            <label>Connects To (Comma-Separated IDs)</label>
+            <input type="text" id="markerInputConnects" placeholder="e.g. m2, m5, m8">
+        </div>
+
+        <!-- Telemetry Data Points Editor -->
+        <div class="modal-field">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                <label style="margin: 0;">Telemetry Data Points</label>
+                <button type="button" id="btnAddDataPoint" class="btn btn-sm btn-accent" style="width: auto; padding: 2px 7px;">+ Row</button>
+            </div>
+            <div id="dataPointsContainer"></div>
+        </div>
+
+        <div class="modal-actions">
+            <button class="btn btn-danger" id="btnDeleteMarker" style="display: none;">Delete</button>
+            <button class="btn" id="btnCancelMarker">Cancel</button>
+            <button class="btn btn-accent" id="btnSaveMarker">Save Marker</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
     <script>
+        /* ================= PROCEDURAL AUDIO ENGINE ================= */
+        const NeuralAudio = {
+            ctx: null,
+            enabled: true,
+            droneOsc: null,
+            droneGain: null,
+
+            init() {
+                if (!this.ctx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if (AudioContext) {
+                        this.ctx = new AudioContext();
+                        this.startDrone();
+                    }
+                } else if (this.ctx.state === 'suspended') {
+                    this.ctx.resume();
+                }
+            },
+
+            toggle() {
+                this.enabled = !this.enabled;
+                if (!this.enabled && this.droneGain) {
+                    this.droneGain.gain.linearRampToValueAtTime(0.0001, this.ctx.currentTime + 0.3);
+                } else if (this.enabled) {
+                    this.init();
+                    if (this.droneGain) {
+                        this.droneGain.gain.linearRampToValueAtTime(0.02, this.ctx.currentTime + 0.5);
+                    }
+                }
+                return this.enabled;
+            },
+
+            startDrone() {
+                if (!this.ctx || !this.enabled) return;
+                try {
+                    this.droneOsc = this.ctx.createOscillator();
+                    this.droneGain = this.ctx.createGain();
+                    const filter = this.ctx.createBiquadFilter();
+
+                    this.droneOsc.type = 'sine';
+                    this.droneOsc.frequency.setValueAtTime(55, this.ctx.currentTime);
+
+                    filter.type = 'lowpass';
+                    filter.frequency.setValueAtTime(140, this.ctx.currentTime);
+
+                    this.droneGain.gain.setValueAtTime(0.02, this.ctx.currentTime);
+
+                    this.droneOsc.connect(filter);
+                    filter.connect(this.droneGain);
+                    this.droneGain.connect(this.ctx.destination);
+                    this.droneOsc.start();
+                } catch(e) {}
+            },
+
+            playBlip(freq = 880, duration = 0.12) {
+                if (!this.enabled || !this.ctx) return;
+                try {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(freq * 1.5, this.ctx.currentTime + duration);
+
+                    gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + duration);
+
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + duration);
+                } catch(e) {}
+            },
+
+            playNeuralZap() {
+                if (!this.enabled || !this.ctx) return;
+                try {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(380, this.ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(120, this.ctx.currentTime + 0.2);
+
+                    gain.gain.setValueAtTime(0.035, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.2);
+
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + 0.2);
+                } catch(e) {}
+            },
+
+            playZoomBoom() {
+                if (!this.enabled || !this.ctx) return;
+                try {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(90, this.ctx.currentTime);
+                    osc.frequency.exponentialRampToValueAtTime(30, this.ctx.currentTime + 0.4);
+
+                    gain.gain.setValueAtTime(0.07, this.ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, this.ctx.currentTime + 0.4);
+
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start();
+                    osc.stop(this.ctx.currentTime + 0.4);
+                } catch(e) {}
+            }
+        };
+
+        /* ================= COSMIC PARTICLES ================= */
+        const canvas = document.getElementById('fx-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.8;
+                this.speedX = (Math.random() - 0.5) * 0.35;
+                this.speedY = (Math.random() - 0.5) * 0.35;
+                this.alpha = Math.random() * 0.6 + 0.2;
+                this.hue = Math.random() > 0.6 ? 185 : (Math.random() > 0.5 ? 45 : 280);
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 90) {
+                    this.x -= (dx / dist) * 0.5;
+                    this.y -= (dy / dist) * 0.5;
+                }
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.fillStyle = `hsla(${this.hue}, 100%, 75%, ${this.alpha})`;
+                ctx.shadowBlur = 6;
+                ctx.shadowColor = `hsla(${this.hue}, 100%, 60%, ${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+        for (let i = 0; i < 65; i++) particles.push(new Particle());
+
+        let lastFrameTime = performance.now();
+        let frameCount = 0;
+        const fpsCounter = document.getElementById('fps-counter');
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            frameCount++;
+            const now = performance.now();
+            if (now - lastFrameTime >= 1000) {
+                fpsCounter.innerText = `${frameCount} FPS`;
+                frameCount = 0;
+                lastFrameTime = now;
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+        window.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+
+        /* ================= EMBEDDED TELEMETRY SCHEMAS ================= */
+        const FRAME_1_DATA = {
+            "scene_name": "Organic Craft - Celestial Leviathan",
+            "frame_id": "FRAME 1",
+            "description": "Colossal organic spacecraft floating across the stellar nebula. Living chitinous hull infused with sacred geometry.",
+            "markers": [
+                {
+                    "id": "m1",
+                    "x": 10,
+                    "y": 8,
+                    "label": "Logo: Organic Craft",
+                    "description": "Visual identity of the celestial bio-fleet. Elegant serif typography with biomimetic curves.",
+                    "category": "system",
+                    "duration": 2.2,
+                    "connects_to": ["m2", "m3"]
+                },
+                {
+                    "id": "m2",
+                    "x": 15,
+                    "y": 18,
+                    "label": "Mission Log: Celestial Leviathan",
+                    "description": "Frame 1 telemetry readout: A colossal organic spacecraft floating against a distant emission nebula. The hull fuses chitinous armored plates with sacred geometry conduits.",
+                    "category": "system",
+                    "duration": 3.5,
+                    "zoom": 1.15,
+                    "connects_to": ["m4", "m5"]
+                },
+                {
+                    "id": "m3",
+                    "x": 95,
+                    "y": 7,
+                    "label": "Navigation Matrix",
+                    "description": "Primary sub-space communications menu and interstellar vessel index.",
+                    "category": "navigation",
+                    "duration": 2.0
+                },
+                {
+                    "id": "m4",
+                    "x": 38,
+                    "y": 32,
+                    "label": "Chitinous Dorsal Plates",
+                    "description": "Multi-layered iridescent chitin providing deep-space radiation protection and kinetic micrometeorite deflection.",
+                    "category": "environment",
+                    "duration": 3.2,
+                    "zoom": 1.4,
+                    "connects_to": ["m5", "m6"],
+                    "data_points": [
+                        {"label": "Hull Integrity", "value": "99.4%", "status": "optimal"},
+                        {"label": "Armor Density", "value": "4.8 g/cm³", "status": "stable"},
+                        {"label": "Radiation Shielding", "value": "100%", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m5",
+                    "x": 52,
+                    "y": 44,
+                    "label": "Sacred Mandala Nexus (The Eye)",
+                    "description": "Central biomimetic sphere etched with the Flower of Life geometry. Acts as the primary optic sensor and quantum singularity link.",
+                    "category": "critical",
+                    "duration": 4.5,
+                    "zoom": 1.6,
+                    "connects_to": ["m4", "m6", "m7", "m8"],
+                    "data_points": [
+                        {"label": "Harmonic Resonance", "value": "432.0 Hz", "status": "optimal"},
+                        {"label": "Quantum Sync", "value": "99.8%", "status": "optimal"},
+                        {"label": "Neural Field Radius", "value": "12.4 km", "status": "stable"}
+                    ]
+                },
+                {
+                    "id": "m6",
+                    "x": 26,
+                    "y": 58,
+                    "label": "Bioluminescent Baleen & Intake",
+                    "description": "Ventral scoop structure that sifts interstellar plasma and cosmic dust to feed the internal biomass generator.",
+                    "category": "power",
+                    "duration": 3.2,
+                    "zoom": 1.45,
+                    "connects_to": ["m4", "m7"],
+                    "data_points": [
+                        {"label": "Plasma Intake", "value": "14.2 kT/s", "status": "optimal"},
+                        {"label": "Fuel Conversion", "value": "94.6%", "status": "stable"}
+                    ]
+                },
+                {
+                    "id": "m7",
+                    "x": 50,
+                    "y": 62,
+                    "label": "Pectoral Steering Fin",
+                    "description": "Hydrodynamic-style gravitational fin providing sub-light pitch stabilization and warp curvature alignment.",
+                    "category": "navigation",
+                    "duration": 3.0,
+                    "zoom": 1.35,
+                    "connects_to": ["m5", "m8"],
+                    "data_points": [
+                        {"label": "Sub-Light Vector", "value": "0.42c", "status": "stable"},
+                        {"label": "Gravitational Pitch", "value": "-2.4°", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m8",
+                    "x": 74,
+                    "y": 30,
+                    "label": "Upper Solar Tendrils",
+                    "description": "Superconducting filaments trailing behind the craft, harvesting solar winds and broadcasting long-range telepathic pings.",
+                    "category": "power",
+                    "duration": 3.5,
+                    "zoom": 1.35,
+                    "connects_to": ["m5", "m9"],
+                    "data_points": [
+                        {"label": "Solar Wind Capture", "value": "88.6 GW", "status": "optimal"},
+                        {"label": "Filament Tension", "value": "Nominal", "status": "stable"}
+                    ]
+                },
+                {
+                    "id": "m9",
+                    "x": 78,
+                    "y": 52,
+                    "label": "Lower Caudal Tendrils",
+                    "description": "Flexible propulsion ribbons acting as thermal exhaust radiators and interstellar magnetic field anchors.",
+                    "category": "power",
+                    "duration": 3.0,
+                    "zoom": 1.3,
+                    "connects_to": ["m8", "m10"]
+                },
+                {
+                    "id": "m10",
+                    "x": 88,
+                    "y": 22,
+                    "label": "Emission Nebula Cloud",
+                    "description": "Ambient interstellar dust cloud rich in ionized hydrogen, helium, and organic prebiotic molecules.",
+                    "category": "environment",
+                    "duration": 3.0,
+                    "zoom": 1.25,
+                    "data_points": [
+                        {"label": "Gas Density", "value": "18 atoms/cm³", "status": "stable"},
+                        {"label": "Ambient Temp", "value": "2.7 K", "status": "stable"}
+                    ]
+                },
+                {
+                    "id": "m11",
+                    "x": 18,
+                    "y": 78,
+                    "label": "Telemetry: Exterior Hull",
+                    "description": "Constellation node reporting structural micro-stress and nano-repair biological cycles.",
+                    "category": "system",
+                    "duration": 2.5,
+                    "connects_to": ["m12"]
+                },
+                {
+                    "id": "m12",
+                    "x": 34,
+                    "y": 84,
+                    "label": "Telemetry: Biomimetic Systems",
+                    "description": "Monitors synthetic muscular contractions, neural latency, and bio-hydraulic circulatory pressure.",
+                    "category": "critical",
+                    "duration": 3.2,
+                    "connects_to": ["m11", "m13"],
+                    "data_points": [
+                        {"label": "Synaptic Latency", "value": "0.08 ms", "status": "optimal"},
+                        {"label": "Cellular Regeneration", "value": "100%", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m13",
+                    "x": 50,
+                    "y": 76,
+                    "label": "Telemetry: Sacred Geometry",
+                    "description": "Vector alignment grid maintaining Golden Ratio (Phi = 1.618) harmonics throughout the ship's energy distribution.",
+                    "category": "power",
+                    "duration": 3.2,
+                    "connects_to": ["m12", "m14", "m16"],
+                    "data_points": [
+                        {"label": "Phi Alignment", "value": "1.61803", "status": "optimal"},
+                        {"label": "Harmonic Purity", "value": "99.9%", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m14",
+                    "x": 65,
+                    "y": 84,
+                    "label": "Telemetry: Solar Tendrils",
+                    "description": "Real-time impedance monitoring across all 18 trailing superconducting sensory tendrils.",
+                    "category": "power",
+                    "duration": 2.5,
+                    "connects_to": ["m13", "m15"]
+                },
+                {
+                    "id": "m15",
+                    "x": 81,
+                    "y": 78,
+                    "label": "Telemetry: Interior Sanctuary",
+                    "description": "Atmospheric pressure and life-support homeostasis metrics for the crew chambers nestled inside the core.",
+                    "category": "environment",
+                    "duration": 3.0,
+                    "connects_to": ["m14"],
+                    "data_points": [
+                        {"label": "Sanctuary Pressure", "value": "1.01 atm", "status": "optimal"},
+                        {"label": "Biomass Vitality", "value": "99.5%", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m16",
+                    "x": 50,
+                    "y": 92,
+                    "label": "Trigger: Explore Hull",
+                    "description": "Interactive deep-scan command initiating internal schematic traversal to the core engine room.",
+                    "category": "navigation",
+                    "duration": 2.5,
+                    "connects_to": ["m13", "m17"]
+                },
+                {
+                    "id": "m17",
+                    "x": 94,
+                    "y": 87,
+                    "label": "Gyro Compass & Parallax Sensor",
+                    "description": "Multi-axis celestial navigation compass with GSAP parallax depth tracking enabled.",
+                    "category": "system",
+                    "duration": 2.5,
+                    "data_points": [
+                        {"label": "Parallax Engine", "value": "Active", "status": "optimal"},
+                        {"label": "Horizon Pitch", "value": "0.00°", "status": "stable"}
+                    ]
+                }
+            ]
+        };
+
+        const FRAME_2_DATA = {
+            "scene_name": "Organic Craft - The Heart (Motor)",
+            "frame_id": "FRAME 2",
+            "description": "The beating singularity heart of the Leviathan. Ancient runic gyroscopes contain a living vortex of pure plasma energy within a translucent bone cage.",
+            "markers": [
+                {
+                    "id": "m1",
+                    "x": 50,
+                    "y": 5,
+                    "label": "Logo: Organic Craft",
+                    "description": "Central identity insignia presiding over the core propulsion cathedral.",
+                    "category": "system",
+                    "duration": 2.0,
+                    "connects_to": ["m2", "m3", "m4", "m5"]
+                },
+                {
+                    "id": "m2",
+                    "x": 37,
+                    "y": 5,
+                    "label": "Nav: Fleet",
+                    "description": "Sub-space transponder link to the remaining organic capital vessels in the quadrant.",
+                    "category": "navigation",
+                    "duration": 1.5
+                },
+                {
+                    "id": "m3",
+                    "x": 65,
+                    "y": 5,
+                    "label": "Nav: Technology",
+                    "description": "Biomechanical propulsion blueprints, soul-drive schematics, and runic containment archives.",
+                    "category": "navigation",
+                    "duration": 1.5
+                },
+                {
+                    "id": "m4",
+                    "x": 79,
+                    "y": 5,
+                    "label": "Nav: The Journey",
+                    "description": "Chronological expedition logs from the origin world through the Veil of Nebulae.",
+                    "category": "navigation",
+                    "duration": 1.5
+                },
+                {
+                    "id": "m5",
+                    "x": 91,
+                    "y": 5,
+                    "label": "Nav: About Us",
+                    "description": "The biological manifesto of the Living Vessels and the symbiotic crew bonding rituals.",
+                    "category": "navigation",
+                    "duration": 1.5
+                },
+                {
+                    "id": "m6",
+                    "x": 28,
+                    "y": 88,
+                    "label": "Frame 2: The Heart (Motor)",
+                    "description": "Active module identifier: The Living Engine Room. Singularity core operating at sustained optimal output.",
+                    "category": "system",
+                    "duration": 2.5,
+                    "connects_to": ["m7", "m10"]
+                },
+                {
+                    "id": "m7",
+                    "x": 38,
+                    "y": 48,
+                    "label": "The Contained Singularity",
+                    "description": "The blazing cosmic heart of the ship: a captured micro-black hole emitting pure luminescent plasma. Powers warp drive and life-support.",
+                    "category": "critical",
+                    "duration": 4.5,
+                    "zoom": 1.65,
+                    "connects_to": ["m8", "m9", "m10", "m11", "m12"],
+                    "data_points": [
+                        {"label": "Core Output", "value": "1.44 TW", "status": "optimal"},
+                        {"label": "Singularity Radius", "value": "0.82 m", "status": "stable"},
+                        {"label": "Event Horizon Flux", "value": "Stable", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m8",
+                    "x": 38,
+                    "y": 40,
+                    "label": "Ancient Inscribed Runic Rings",
+                    "description": "Three concentric gyroscopic rings carved from metamaterial stone and bone. Glowing engraved runes dynamically stabilize the gravitational distortion.",
+                    "category": "power",
+                    "duration": 4.0,
+                    "zoom": 1.5,
+                    "connects_to": ["m7", "m9"],
+                    "data_points": [
+                        {"label": "Spin Velocity", "value": "3,600 RPM", "status": "optimal"},
+                        {"label": "Runic Charge", "value": "99.8%", "status": "optimal"},
+                        {"label": "Magnetic Shear", "value": "0.02%", "status": "stable"}
+                    ]
+                },
+                {
+                    "id": "m9",
+                    "x": 16,
+                    "y": 45,
+                    "label": "Translucent Bio-Cage Ribs",
+                    "description": "Arched biological ribs composed of hardened chitin-glass composites. Forms a physical and psionic Faraday cage isolating the crew from extreme gravity waves.",
+                    "category": "environment",
+                    "duration": 3.2,
+                    "zoom": 1.35,
+                    "connects_to": ["m7", "m10"],
+                    "data_points": [
+                        {"label": "Tensile Strength", "value": "4.2 GPa", "status": "optimal"},
+                        {"label": "Thermal Dissipation", "value": "99.1%", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m10",
+                    "x": 38,
+                    "y": 82,
+                    "label": "Engine Pedestal & Power Roots",
+                    "description": "Petrified organic base housing root-like conduit arteries that channel liquid plasma directly into the ship's spinal cord.",
+                    "category": "power",
+                    "duration": 3.0,
+                    "zoom": 1.35,
+                    "connects_to": ["m7", "m9"],
+                    "data_points": [
+                        {"label": "Plasma Flow", "value": "2.8 kL/s", "status": "optimal"},
+                        {"label": "Grounding Index", "value": "100%", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m11",
+                    "x": 84,
+                    "y": 35,
+                    "label": "HUD: Biometric Resonance",
+                    "description": "Telemetry monitor visualizing the harmonic frequency coupling between the pilot's neural rhythm and the motor's core pulse.",
+                    "category": "critical",
+                    "duration": 4.0,
+                    "zoom": 1.4,
+                    "connects_to": ["m7", "m12"],
+                    "data_points": [
+                        {"label": "Resonance Stability", "value": "93.7%", "status": "stable"},
+                        {"label": "Sine Wave Variance", "value": "0.04%", "status": "optimal"},
+                        {"label": "Neural Entrainment", "value": "Active", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m12",
+                    "x": 84,
+                    "y": 68,
+                    "label": "HUD: Soul-Drive Levels",
+                    "description": "Real-time equalizer bars measuring the active singularity containment threshold and psionic drive efficiency.",
+                    "category": "power",
+                    "duration": 4.0,
+                    "zoom": 1.4,
+                    "connects_to": ["m11", "m7"],
+                    "data_points": [
+                        {"label": "Drive Efficiency", "value": "89%", "status": "optimal"},
+                        {"label": "Singularity Containment", "value": "Active", "status": "stable"},
+                        {"label": "Dark Matter Fuel", "value": "78.4%", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m13",
+                    "x": 90,
+                    "y": 89,
+                    "label": "Sequence: Variant 2/3",
+                    "description": "Stepping indicator: Current view is 2 of 3 in the Living Craft anatomy sequence. Next: The Neural Bridge.",
+                    "category": "navigation",
+                    "duration": 2.2,
+                    "connects_to": ["m12"]
+                }
+            ]
+        };
+
+        const FRAME_3_DATA = {
+            "scene_name": "Organic Craft - The Neural Bridge",
+            "frame_id": "FRAME 3",
+            "description": "The command sanctuary. Pilot bio-mechanical throne interfaced with Earth's terrestrial holomap, living data tendrils, and real-time cognitive metrics.",
+            "markers": [
+                {
+                    "id": "m1",
+                    "x": 19,
+                    "y": 8,
+                    "label": "Logo: Organic Craft",
+                    "description": "Visual identity of the vessel. Rendered in polished gold with organic bio-mechanical filigree.",
+                    "category": "system",
+                    "duration": 2.2,
+                    "connects_to": ["m2", "m3"]
+                },
+                {
+                    "id": "m2",
+                    "x": 52,
+                    "y": 4,
+                    "label": "Navigation: Explore",
+                    "description": "Primary gate into the cartographic database of charted star systems and warp waypoints.",
+                    "category": "navigation",
+                    "duration": 1.8
+                },
+                {
+                    "id": "m3",
+                    "x": 63,
+                    "y": 4,
+                    "label": "Navigation: Vessels",
+                    "description": "Organic Fleet registry, vessel telemetry states, and biological health logs across the swarm.",
+                    "category": "navigation",
+                    "duration": 1.8
+                },
+                {
+                    "id": "m4",
+                    "x": 18,
+                    "y": 15,
+                    "label": "Frame 3: The Neural Bridge",
+                    "description": "Sanctuary section identifier: Bridge command module. Human pilot consciousness directly fused with vessel nervous system.",
+                    "category": "system",
+                    "duration": 2.5,
+                    "connects_to": ["m5", "m10"]
+                },
+                {
+                    "id": "m5",
+                    "x": 50,
+                    "y": 38,
+                    "label": "Terrestrial Holomap",
+                    "description": "Luminescent floating sphere projecting Earth in real time. Continuous planetary biome and biosphere monitoring.",
+                    "category": "environment",
+                    "duration": 4.0,
+                    "zoom": 1.45,
+                    "connects_to": ["m6", "m7", "m8", "m20"],
+                    "data_points": [
+                        {"label": "Biosphere Integrity", "value": "98.2%", "status": "optimal"},
+                        {"label": "Atmospheric Toxicity", "value": "0.4%", "status": "stable"},
+                        {"label": "Orbital Telemetry", "value": "Geo-Sync", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m6",
+                    "x": 50,
+                    "y": 62,
+                    "label": "Link Seat (Pilot Throne)",
+                    "description": "Biomechanical command throne that physically connects directly with the pilot's spinal cord via synthetic neural synapses.",
+                    "category": "critical",
+                    "duration": 4.0,
+                    "zoom": 1.4,
+                    "connects_to": ["m5", "m7", "m12", "m20"],
+                    "data_points": [
+                        {"label": "Biomech Integration", "value": "100%", "status": "optimal"},
+                        {"label": "Spinal Stress", "value": "12%", "status": "stable"},
+                        {"label": "Synaptic Feedback", "value": "0.02 ms", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m7",
+                    "x": 70,
+                    "y": 55,
+                    "label": "Cognitive Interface HUD",
+                    "description": "Real-time brainwave visualization tracking dopamine levels, cognitive load, and neural sync rate during flight.",
+                    "category": "critical",
+                    "duration": 4.0,
+                    "zoom": 1.5,
+                    "connects_to": ["m6", "m14"],
+                    "data_points": [
+                        {"label": "Neural Sync Rate", "value": "99.4%", "status": "optimal"},
+                        {"label": "Dopamine Levels", "value": "87%", "status": "warning"},
+                        {"label": "Cognitive Load", "value": "45%", "status": "stable"}
+                    ]
+                },
+                {
+                    "id": "m8",
+                    "x": 30,
+                    "y": 55,
+                    "label": "Deep Space Proximity Radar",
+                    "description": "Volumetric spherical radar mapping gravitational anomalies, asteroids, and nearby vessels within 500,000 km.",
+                    "category": "navigation",
+                    "duration": 3.0,
+                    "zoom": 1.35,
+                    "connects_to": ["m5", "m6"],
+                    "data_points": [
+                        {"label": "Scan Radius", "value": "500k km", "status": "optimal"},
+                        {"label": "Hostile Signatures", "value": "0", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m9",
+                    "x": 80,
+                    "y": 15,
+                    "label": "Spiral Galaxy Vista",
+                    "description": "Stellar panorama visible through the right semi-transparent hull canopy. Real-time starlight spectrum analysis.",
+                    "category": "environment",
+                    "duration": 3.0,
+                    "zoom": 1.35,
+                    "connects_to": ["m19"]
+                },
+                {
+                    "id": "m10",
+                    "x": 20,
+                    "y": 15,
+                    "label": "Purple Nebula Canopy",
+                    "description": "Ionized interstellar gas clouds shimmering through the left viewport. Visual sensor calibration zone.",
+                    "category": "environment",
+                    "duration": 3.0,
+                    "zoom": 1.35,
+                    "connects_to": ["m4", "m19"]
+                },
+                {
+                    "id": "m11",
+                    "x": 93,
+                    "y": 85,
+                    "label": "Sanctuary Progress: 3 of 3",
+                    "description": "Sequence step completion indicator: Final stage of the vessel traversal sequence.",
+                    "category": "system",
+                    "duration": 2.0
+                },
+                {
+                    "id": "m12",
+                    "x": 50,
+                    "y": 92,
+                    "label": "Living Data Tendrils",
+                    "description": "Bioluminescent optical fibers growing across the floor, carrying vital telemetry from the core heart directly to the throne.",
+                    "category": "power",
+                    "duration": 3.2,
+                    "connects_to": ["m6", "m13", "m16"],
+                    "data_points": [
+                        {"label": "Fiber Bandwidth", "value": "120 Tbps", "status": "optimal"},
+                        {"label": "Signal Attenuation", "value": "0.001 dB", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m13",
+                    "x": 35,
+                    "y": 52,
+                    "label": "Warp Drive Power Metrics",
+                    "description": "Equalizer bar indicators displaying output from the singularity core into the bridge substations.",
+                    "category": "power",
+                    "duration": 3.2,
+                    "connects_to": ["m12", "m8"],
+                    "data_points": [
+                        {"label": "Warp Core Output", "value": "1.21 GW", "status": "optimal"},
+                        {"label": "Plasma Reserve", "value": "92%", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m14",
+                    "x": 65,
+                    "y": 55,
+                    "label": "Symbiotic AI Vital Status",
+                    "description": "Health diagnostic of the organic ship's semi-sentient consciousness and emotional equilibrium.",
+                    "category": "system",
+                    "duration": 3.0,
+                    "connects_to": ["m7"],
+                    "data_points": [
+                        {"label": "AI Core Temp", "value": "34.2 °C", "status": "stable"},
+                        {"label": "Logic Loops", "value": "100%", "status": "optimal"}
+                    ]
+                },
+                {
+                    "id": "m15",
+                    "x": 5,
+                    "y": 50,
+                    "label": "Rib Structure Armor",
+                    "description": "Bio-ceramic composite ribs encasing the neural sanctuary in shock-absorbing organic lattice.",
+                    "category": "system",
+                    "duration": 2.5
+                },
+                {
+                    "id": "m16",
+                    "x": 95,
+                    "y": 50,
+                    "label": "Wall Plasma Reflectors",
+                    "description": "Focal nodes embedded in the lateral membranes concentrating excess plasma into illumination.",
+                    "category": "power",
+                    "duration": 2.5,
+                    "connects_to": ["m12"]
+                },
+                {
+                    "id": "m17",
+                    "x": 10,
+                    "y": 96,
+                    "label": "Registry & Copyright",
+                    "description": "Organic Sacred Spacecraft Architecture © 2026. Living technology patent.",
+                    "category": "system",
+                    "duration": 1.5
+                },
+                {
+                    "id": "m18",
+                    "x": 92,
+                    "y": 97,
+                    "label": "Transceiver Array",
+                    "description": "Deep-space comms array broadcasting encrypted data to Earth base stations.",
+                    "category": "system",
+                    "duration": 1.5
+                },
+                {
+                    "id": "m19",
+                    "x": 50,
+                    "y": 18,
+                    "label": "Observation Canopy Vertex",
+                    "description": "The highest vanishing point of the bridge dome, looking forward into the cosmic infinite.",
+                    "category": "environment",
+                    "duration": 3.5,
+                    "zoom": 1.3,
+                    "connects_to": ["m9", "m10"]
+                },
+                {
+                    "id": "m20",
+                    "x": 50,
+                    "y": 50,
+                    "label": "Point of Convergence",
+                    "description": "The exact geometric center of the Neural Bridge where the pilot's thoughts become vessel velocity.",
+                    "category": "critical",
+                    "duration": 4.5,
+                    "zoom": 1.3,
+                    "connects_to": ["m5", "m6"],
+                    "data_points": [
+                        {"label": "Global Synergy", "value": "100% MAX", "status": "optimal"}
+                    ]
+                }
+            ]
+        };
+
+        /* ================= 3 ORGANIC CRAFT PRESETS ================= */
+        const PRESETS = {
+            frame1: {
+                title: "FRAME 1: CELESTIAL LEVIATHAN",
+                image: "organic_craft_frame_1_celestial_leviathan.png",
+                data: FRAME_1_DATA,
+                theme: "solar"
+            },
+            frame2: {
+                title: "FRAME 2: THE HEART (MOTOR)",
+                image: "organic_craft_frame_2_the_pulsing_core.png",
+                data: FRAME_2_DATA,
+                theme: "danger"
+            },
+            frame3: {
+                title: "FRAME 3: THE NEURAL BRIDGE",
+                image: "organic_craft_frame_3_the_neural_bridge.png",
+                data: FRAME_3_DATA,
+                theme: "default"
+            }
+        };
+
+        /* ================= STATE & REFS ================= */
         const container = document.getElementById('container');
         const visualWrapper = document.getElementById('visual-wrapper');
         const loader = document.getElementById('loader');
         const statusText = document.getElementById('status-text');
         const svgCanvas = document.getElementById('svg-lines');
-        
-        const DEFAULT_IMAGE_PATH = 'organic_craft_frame_3_the_neural_bridge.png';
-        const DEFAULT_JSON_PATH = 'organic_craft.json';
-        
-        let masterTimeline = gsap.timeline({ paused: true });
-        let currentData = null;
-        let markersHTMLElements = []; 
-        let svgLinesElements = []; // Store lines for GSAP targets
+        const hudCoords = document.getElementById('hudCoords');
+        const hudCrosshair = document.getElementById('hud-crosshair');
+        const hudZoomLabel = document.getElementById('hudZoomLabel');
+        const hudMissionTitle = document.getElementById('hudMissionTitle');
+        const ambientBg = document.getElementById('ambient-bg');
+        const playPauseBtn = document.getElementById('btnPlayPause');
 
-        // CSS Variables map for categories
+        let currentData = null;
+        let masterTimeline = gsap.timeline({ paused: true });
+        let markersHTMLElements = [];
+        let markerLookup = {};
+        let currentMarkerIndex = 0;
+        let playbackSpeed = 1.0;
+        let activeDisplayMode = 'tour'; // 'tour' | 'all' | 'creator'
+        let currentPresetKey = 'frame1';
+        let isEditingMarker = false;
+        let editingMarkerId = null;
+
         const categoryColors = {
             'system': 'var(--cat-system)',
             'critical': 'var(--cat-critical)',
@@ -522,91 +2090,83 @@
             'navigation': 'var(--cat-navigation)'
         };
 
+        /* ================= INIT ================= */
         document.addEventListener('DOMContentLoaded', async () => {
-            statusText.innerText = "Establishing Connection...";
-            try {
-                await loadBackgroundImage(DEFAULT_IMAGE_PATH);
-                const response = await fetch(DEFAULT_JSON_PATH);
-                if (!response.ok) throw new Error("JSON not found");
-                currentData = await response.json();
-                
-                buildScene(currentData);
-                statusText.innerText = "Telemetry Sync Complete.";
-                
-                gsap.to(loader, { opacity: 0, duration: 1, onComplete: () => loader.style.display = 'none' });
-                masterTimeline.play();
-            } catch (error) {
-                console.error(error);
-                document.getElementById('loader-text').innerText = "AUTO-SYNC FAILED. MANUAL OVERRIDE REQUIRED.";
-                statusText.innerText = "Awaiting manual input.";
-                setTimeout(() => gsap.to(loader, { opacity: 0, duration: 1, onComplete: () => loader.style.display = 'none' }), 1500);
-            }
+            setupEventListeners();
+            await loadPreset('frame1');
+            document.addEventListener('click', () => NeuralAudio.init(), { once: true });
         });
 
+        async function loadPreset(key) {
+            currentPresetKey = key;
+            const preset = PRESETS[key];
+            if (!preset) return;
+
+            // UI sync
+            document.querySelectorAll('.preset-btn, .hud-frame-pill').forEach(b => {
+                b.classList.toggle('active', b.dataset.preset === key);
+            });
+
+            if (preset.theme) {
+                document.getElementById('themeSelect').value = preset.theme;
+                applyTheme(preset.theme);
+            }
+
+            statusText.innerText = `Mounting ${preset.title}...`;
+            hudMissionTitle.innerText = `MISSION // ${preset.title}`;
+            document.getElementById('timelineSceneLabel').innerText = preset.title;
+
+            try {
+                await loadBackgroundImage(preset.image);
+                // Directly load the embedded data - 100% offline ready!
+                const data = JSON.parse(JSON.stringify(preset.data));
+                buildScene(data);
+                statusText.innerText = "Telemetry Sync Complete.";
+            } catch (err) {
+                console.warn("Load error:", err);
+                statusText.innerText = "Local fallback loaded.";
+            }
+
+            gsap.to(loader, { opacity: 0, duration: 0.6, onComplete: () => loader.style.display = 'none' });
+        }
+
         function loadBackgroundImage(url) {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 const img = new Image();
                 img.onload = () => { container.style.backgroundImage = `url('${url}')`; resolve(); };
-                img.onerror = () => reject(new Error("Image failed to load"));
+                img.onerror = () => { container.style.backgroundImage = `url('${url}')`; resolve(); };
                 img.src = url;
             });
         }
 
-        document.getElementById('imageUpload').addEventListener('change', function (e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (event) { container.style.backgroundImage = `url('${event.target.result}')`; statusText.innerText = "Local Visual Loaded."; };
-                reader.readAsDataURL(file);
-            }
-        });
-
-        document.getElementById('jsonUpload').addEventListener('change', function (e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (event) {
-                    try {
-                        currentData = JSON.parse(event.target.result);
-                        buildScene(currentData);
-                        statusText.innerText = "Local Telemetry Loaded.";
-                        masterTimeline.restart();
-                    } catch (error) { alert("Invalid JSON Format.\nDetails: " + error.message); }
-                };
-                reader.readAsText(file);
-            }
-        });
-
+        /* ================= SCENE BUILDER ================= */
         function buildScene(data) {
-            markersHTMLElements.forEach(el => el.remove());
+            currentData = data;
+            markersHTMLElements.forEach(el => el.group.remove());
             markersHTMLElements = [];
+            markerLookup = {};
             svgCanvas.innerHTML = '';
-            svgLinesElements = [];
             masterTimeline.clear();
-            
-            // Reset container scale/origin
-            gsap.set(container, { scale: 1, transformOrigin: "50% 50%", filter: "blur(0px)" });
 
             if (!data.markers || !Array.isArray(data.markers)) return;
 
-            masterTimeline.fromTo(container, 
-                { filter: "blur(20px)", scale: 1.1 },
-                { filter: "blur(0px)", scale: 1, duration: 2, ease: "power3.out" }
-            );
+            document.getElementById('markerCount').innerText = data.markers.length;
+            renderMarkerDirectory(data.markers);
+            buildTimelinePips(data.markers);
 
-            // Create a lookup for connections
-            const markerLookup = {};
-            data.markers.forEach(m => markerLookup[m.id] = m);
+            gsap.set(container, { scale: 1, x: 0, y: 0, transformOrigin: "50% 50%", filter: "blur(0px)" });
+
+            data.markers.forEach((m, idx) => {
+                markerLookup[m.id] = { ...m, index: idx };
+            });
 
             data.markers.forEach((m, index) => {
                 const x = Math.max(0, Math.min(100, m.x));
                 const y = Math.max(0, Math.min(100, m.y));
-                
-                // Color category logic
-                const catClass = m.category ? `cat-${m.category}` : '';
+                const catClass = m.category ? `cat-${m.category}` : 'cat-system';
                 const baseColor = m.category ? categoryColors[m.category] : 'var(--accent-main)';
 
-                // Formulate Data Points HTML if they exist
+                // Telemetry HTML
                 let telemetryHTML = '';
                 if (m.data_points && m.data_points.length > 0) {
                     telemetryHTML = '<div class="telemetry-grid">';
@@ -621,29 +2181,37 @@
                     telemetryHTML += '</div>';
                 }
 
-                // Append UI Elements
+                // Group
                 const group = document.createElement('div');
                 group.className = 'marker-group';
-                group.style.left = `${x}%`; group.style.top = `${y}%`;
+                group.dataset.id = m.id;
+                group.dataset.index = index;
+                group.style.left = `${x}%`;
+                group.style.top = `${y}%`;
 
                 const pulse = document.createElement('div');
                 pulse.className = 'marker-pulse';
-                if (m.category) { pulse.style.borderColor = baseColor; }
+                if (m.category) pulse.style.borderColor = baseColor;
+
+                const radar = document.createElement('div');
+                radar.className = 'marker-radar';
+                if (m.category) radar.style.borderColor = baseColor;
 
                 const marker = document.createElement('div');
                 marker.className = `marker ${catClass}`;
 
                 const isRightSide = x > 60;
+                const isBottomSide = y > 52;
                 const card = document.createElement('div');
-                card.className = `info-card ${isRightSide ? 'left' : 'right'} ${catClass}`;
+                card.className = `info-card ${isRightSide ? 'left' : 'right'} ${isBottomSide ? 'bottom-align' : ''} ${catClass}`;
                 card.innerHTML = `
-                    <div class="frame-id">ID: ${m.id}</div>
+                    <div class="frame-id">ID: ${m.id} // STEP ${index + 1}</div>
                     <h3>${m.label}</h3>
                     <p>${m.description}</p>
                     ${telemetryHTML}
                 `;
 
-                // Handle SVG Connections
+                // SVG Connections
                 let outLines = [];
                 if (m.connects_to && m.connects_to.length > 0) {
                     m.connects_to.forEach(targetId => {
@@ -654,7 +2222,6 @@
                             line.setAttribute('y1', `${y}%`);
                             line.setAttribute('x2', `${target.x}%`);
                             line.setAttribute('y2', `${target.y}%`);
-                            // We use pathLength="100" to make stroke-dasharray predictable
                             line.setAttribute('pathLength', '100');
                             line.setAttribute('class', 'neural-link');
                             line.style.stroke = baseColor;
@@ -664,97 +2231,720 @@
                     });
                 }
 
-                // Interactions
+                // Interaction
                 marker.addEventListener('mouseenter', () => {
-                    masterTimeline.pause();
-                    gsap.to(card, { opacity: 1, scale: 1.05, duration: 0.3, ease: "power2.out", display: 'block' });
-                    gsap.to(marker, { scale: 1.3, duration: 0.3 });
-                    // Highlight lines
-                    if(outLines.length) gsap.to(outLines, { opacity: 1, strokeWidth: 4, duration: 0.3 });
-                });
-                
-                marker.addEventListener('mouseleave', () => {
-                    gsap.to(card, { scale: 1, duration: 0.3 });
-                    gsap.to(marker, { scale: 1, duration: 0.3 });
-                    if(outLines.length) gsap.to(outLines, { opacity: 0.7, strokeWidth: 2, duration: 0.3 });
-                    masterTimeline.play();
+                    NeuralAudio.playBlip(750, 0.08);
+                    if (activeDisplayMode === 'all') {
+                        gsap.to(card, { opacity: 1, scale: 1.05, duration: 0.25, display: 'block' });
+                        if (outLines.length) gsap.to(outLines, { opacity: 1, strokeWidth: 3.5, duration: 0.2 });
+                    }
                 });
 
+                marker.addEventListener('mouseleave', () => {
+                    if (activeDisplayMode === 'all') {
+                        gsap.to(card, { opacity: 0, scale: 1, duration: 0.2, display: 'none' });
+                        if (outLines.length) gsap.to(outLines, { opacity: 0.6, strokeWidth: 2, duration: 0.2 });
+                    }
+                });
+
+                // Click behavior depending on Mode
+                marker.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (activeDisplayMode === 'creator') {
+                        openEditMarkerModal(m);
+                    } else {
+                        focusMarker(index);
+                    }
+                });
+
+                // Dragging in Creator Mode
+                let isDragging = false;
+                marker.addEventListener('mousedown', (e) => {
+                    if (activeDisplayMode !== 'creator') return;
+                    e.stopPropagation();
+                    isDragging = true;
+
+                    const onMouseMove = (moveEvent) => {
+                        if (!isDragging) return;
+                        const rect = container.getBoundingClientRect();
+                        const newX = Math.max(0, Math.min(100, ((moveEvent.clientX - rect.left) / rect.width) * 100));
+                        const newY = Math.max(0, Math.min(100, ((moveEvent.clientY - rect.top) / rect.height) * 100));
+
+                        group.style.left = `${newX.toFixed(1)}%`;
+                        group.style.top = `${newY.toFixed(1)}%`;
+                        m.x = parseFloat(newX.toFixed(1));
+                        m.y = parseFloat(newY.toFixed(1));
+
+                        // Redraw lines
+                        updateSvgLinesForMarker(m.id);
+                    };
+
+                    const onMouseUp = () => {
+                        isDragging = false;
+                        window.removeEventListener('mousemove', onMouseMove);
+                        window.removeEventListener('mouseup', onMouseUp);
+                        const isRightSide = m.x > 60;
+                        const isBottomSide = m.y > 52;
+                        card.className = `info-card ${isRightSide ? 'left' : 'right'} ${isBottomSide ? 'bottom-align' : ''} ${catClass}`;
+                        showToast(`Repositioned ${m.label} to (${m.x}%, ${m.y}%)`);
+                    };
+
+                    window.addEventListener('mousemove', onMouseMove);
+                    window.addEventListener('mouseup', onMouseUp);
+                });
+
+                group.appendChild(radar);
                 group.appendChild(pulse);
                 group.appendChild(marker);
                 group.appendChild(card);
                 container.appendChild(group);
-                markersHTMLElements.push(group);
+                markersHTMLElements.push({ group, marker, card, pulse, outLines, markerData: m });
 
-                // Initial States
                 gsap.set(group, { opacity: 0, scale: 0 });
                 gsap.set(card, { opacity: 0, x: isRightSide ? 20 : -20 });
-                if (outLines.length) { gsap.set(outLines, { strokeDashoffset: 100 }); }
+                if (outLines.length) gsap.set(outLines, { strokeDashoffset: 100 });
+            });
 
+            if (activeDisplayMode === 'tour') {
+                buildTourTimeline();
+                masterTimeline.pause(0);
+                gsap.set(container, { filter: "blur(0px)", scale: 1 });
+                playPauseBtn.innerText = "▶";
+                playPauseBtn.classList.remove('active');
+                statusText.innerText = "System Ready. Press Play to Begin.";
+            } else if (activeDisplayMode === 'all') {
+                showAllMarkersMode();
+            } else if (activeDisplayMode === 'creator') {
+                showAllMarkersMode();
+            }
+        }
+
+        /* Update SVG lines during drag */
+        function updateSvgLinesForMarker(markerId) {
+            svgCanvas.innerHTML = '';
+            markersHTMLElements.forEach(item => {
+                const m = item.markerData;
+                item.outLines = [];
+                if (m.connects_to && m.connects_to.length > 0) {
+                    m.connects_to.forEach(targetId => {
+                        const target = currentData.markers.find(t => t.id === targetId);
+                        if (target) {
+                            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                            line.setAttribute('x1', `${m.x}%`);
+                            line.setAttribute('y1', `${m.y}%`);
+                            line.setAttribute('x2', `${target.x}%`);
+                            line.setAttribute('y2', `${target.y}%`);
+                            line.setAttribute('pathLength', '100');
+                            line.setAttribute('class', 'neural-link');
+                            line.style.stroke = m.category ? categoryColors[m.category] : 'var(--accent-main)';
+                            line.style.strokeDashoffset = '0';
+                            line.style.opacity = '0.7';
+                            svgCanvas.appendChild(line);
+                            item.outLines.push(line);
+                        }
+                    });
+                }
+            });
+        }
+
+        /* ================= FULL SEQUENCE PLAYBACK ENGINE ================= */
+        function buildTourTimeline() {
+            masterTimeline.clear();
+            masterTimeline.timeScale(playbackSpeed);
+
+            masterTimeline.fromTo(container, 
+                { filter: "blur(18px)", scale: 1.08 },
+                { filter: "blur(0px)", scale: 1, duration: 1.4, ease: "power3.out" }
+            );
+
+            markersHTMLElements.forEach((item, index) => {
+                const m = item.markerData;
+                const x = m.x;
+                const y = m.y;
+                const isRightSide = x > 60;
                 const displayDuration = m.duration || 3;
 
-                // --- Build Timeline Sequence ---
-                
-                // If there's a camera zoom, animate container BEFORE marker appears
+                // Step Trigger Call
+                masterTimeline.call(() => {
+                    updateActiveMarkerUI(index);
+                    if (m.zoom && m.zoom > 1.25) NeuralAudio.playZoomBoom();
+                    if (item.outLines.length) NeuralAudio.playNeuralZap();
+
+                    if (m.category && categoryColors[m.category]) {
+                        ambientBg.style.background = `radial-gradient(circle at ${x}% ${y}%, ${categoryColors[m.category]} 0%, transparent 60%)`;
+                    }
+                });
+
+                // Camera Zoom
                 if (m.zoom) {
                     masterTimeline.to(container, {
                         scale: m.zoom,
                         transformOrigin: `${x}% ${y}%`,
-                        duration: 1.5,
+                        duration: 1.4,
                         ease: "power2.inOut"
                     }, "-=0.2");
                 }
 
+                // Marker Entrance
                 masterTimeline
-                    .to(group, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" })
-                    .to(pulse, { opacity: 0.8, scale: 1.5, duration: 0.5, ease: "power2.out" }, "-=0.4")
-                    .to(pulse, { opacity: 0, scale: 2, duration: 0.5 }, "-=0.1")
-                    .to(card, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, "-=0.5");
-                
-                // Draw Neural Connections organically if they exist
-                if (outLines.length) {
-                    masterTimeline.to(outLines, {
+                    .to(item.group, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.6)" })
+                    .to(item.pulse, { opacity: 0.8, scale: 1.6, duration: 0.45, ease: "power2.out" }, "-=0.35")
+                    .to(item.pulse, { opacity: 0, scale: 2.2, duration: 0.45 }, "-=0.1")
+                    .to(item.card, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, "-=0.4");
+
+                // Draw Neural Links
+                if (item.outLines.length) {
+                    masterTimeline.to(item.outLines, {
                         strokeDashoffset: 0,
-                        duration: 1.2,
+                        duration: 1.0,
                         ease: "power2.out",
-                        stagger: 0.2
-                    }, "-=0.5"); // Starts while card is appearing
+                        stagger: 0.15
+                    }, "-=0.4");
                 }
 
+                // Hold for duration
                 masterTimeline.to({}, { duration: displayDuration });
 
-                // Fade out marker, card, and lines
-                let targets = [group, card];
-                if (outLines.length) targets = targets.concat(outLines);
-                
-                masterTimeline.to(targets, { opacity: 0, scale: 0.9, duration: 0.5, ease: "power2.in" });
-                
-                // Revert zoom if applied, so it's ready for next sequence or normal view
+                // Exit
+                let targets = [item.group, item.card];
+                if (item.outLines.length) targets = targets.concat(item.outLines);
+                masterTimeline.to(targets, { opacity: 0, scale: 0.9, duration: 0.4, ease: "power2.in" });
+
                 if (m.zoom) {
-                    masterTimeline.to(container, {
-                        scale: 1,
-                        duration: 1.5,
-                        ease: "power2.inOut"
-                    }, "-=0.5");
+                    masterTimeline.to(container, { scale: 1, duration: 1.1, ease: "power2.inOut" }, "-=0.35");
                 }
             });
-            
+
             masterTimeline.call(() => {
-                statusText.innerText = "Sequence Complete. System Idle.";
-                // Reset container at the very end just to be safe
-                gsap.to(container, { scale: 1, duration: 1, ease: "power2.inOut" });
+                const autoLoop = document.getElementById('loopToggle').checked;
+                if (autoLoop) {
+                    statusText.innerText = "Looping Sequence...";
+                    masterTimeline.restart();
+                } else {
+                    statusText.innerText = "Sequence Complete. System Idle.";
+                    playPauseBtn.innerText = "▶";
+                    playPauseBtn.classList.remove('active');
+                    gsap.to(container, { scale: 1, duration: 1, ease: "power2.inOut" });
+                }
             });
         }
 
-        document.getElementById('btnPlay').addEventListener('click', () => { masterTimeline.play(); statusText.innerText = "Sequence Playing..."; });
-        document.getElementById('btnPause').addEventListener('click', () => { masterTimeline.pause(); statusText.innerText = "Sequence Paused."; });
-        document.getElementById('btnRestart').addEventListener('click', () => { masterTimeline.restart(); statusText.innerText = "Sequence Restarted."; });
+        function playEntireSequence() {
+            if (activeDisplayMode !== 'tour') {
+                activeDisplayMode = 'tour';
+                setTabActive('modeTourBtn');
+                document.body.classList.remove('mode-creator');
+            }
+            if (masterTimeline.progress() >= 0.999 || masterTimeline.duration() === 0) {
+                buildTourTimeline();
+                masterTimeline.restart();
+            } else {
+                masterTimeline.play();
+            }
+            playPauseBtn.innerText = "⏸";
+            playPauseBtn.classList.add('active');
+            statusText.innerText = "Playing Entire Sequence...";
+        }
 
-        document.getElementById('themeSelect').addEventListener('change', function (e) {
-            document.body.className = ''; 
-            if (e.target.value !== 'default') { document.body.classList.add(`theme-${e.target.value}`); }
-            gsap.fromTo("body", {opacity: 0.8}, {opacity: 1, duration: 0.5});
-        });
+        /* ================= SHOW ALL / CREATOR MODE ================= */
+        function showAllMarkersMode() {
+            masterTimeline.pause();
+            playPauseBtn.innerText = "▶";
+            playPauseBtn.classList.remove('active');
+            gsap.to(container, { scale: 1, duration: 0.8, ease: "power2.out" });
+
+            markersHTMLElements.forEach(item => {
+                gsap.to(item.group, { opacity: 1, scale: 1, duration: 0.5 });
+                gsap.set(item.card, { opacity: 0, display: 'none' });
+                if (item.outLines.length) {
+                    gsap.to(item.outLines, { strokeDashoffset: 0, opacity: 0.6, duration: 0.8 });
+                }
+            });
+            statusText.innerText = "Overview Mode Active.";
+        }
+
+        /* Focus single marker */
+        function focusMarker(index) {
+            if (!markersHTMLElements[index]) return;
+            const item = markersHTMLElements[index];
+            const m = item.markerData;
+            currentMarkerIndex = index;
+            updateActiveMarkerUI(index);
+
+            NeuralAudio.playBlip(900, 0.15);
+            if (m.zoom && m.zoom > 1.25) NeuralAudio.playZoomBoom();
+
+            const targetZoom = m.zoom || 1.35;
+            gsap.to(container, {
+                scale: targetZoom,
+                transformOrigin: `${m.x}% ${m.y}%`,
+                duration: 1.2,
+                ease: "power2.inOut"
+            });
+
+            markersHTMLElements.forEach((other, oIdx) => {
+                if (oIdx === index) {
+                    gsap.to(other.group, { opacity: 1, scale: 1.15, duration: 0.4 });
+                    gsap.to(other.card, { opacity: 1, scale: 1, x: 0, duration: 0.4, display: 'block' });
+                    if (other.outLines.length) gsap.to(other.outLines, { strokeDashoffset: 0, opacity: 1, strokeWidth: 3 });
+                } else {
+                    gsap.to(other.card, { opacity: 0, duration: 0.2, display: 'none' });
+                    if (activeDisplayMode === 'tour') gsap.to(other.group, { opacity: 0, duration: 0.2 });
+                }
+            });
+
+            hudCoords.innerHTML = `<span>X: ${m.x.toFixed(1)}%</span><span>Y: ${m.y.toFixed(1)}%</span><span>ZOOM: ${targetZoom.toFixed(1)}x</span>`;
+        }
+
+        /* ================= EXPANDED CREATOR / EDIT ENGINE ================= */
+        function openCreateMarkerModal(x = 50, y = 50) {
+            isEditingMarker = false;
+            editingMarkerId = null;
+
+            document.getElementById('modalTitle').innerText = "📍 Add New Telemetry Marker";
+            document.getElementById('modalModeTag').innerText = "CREATE";
+            document.getElementById('btnDeleteMarker').style.display = 'none';
+
+            const nextId = `m${(currentData && currentData.markers ? currentData.markers.length : 0) + 1}`;
+            document.getElementById('markerInputId').value = nextId;
+            document.getElementById('markerInputX').value = x;
+            document.getElementById('markerInputY').value = y;
+            document.getElementById('markerInputLabel').value = '';
+            document.getElementById('markerInputDesc').value = '';
+            document.getElementById('markerInputDuration').value = '3.0';
+            document.getElementById('markerInputZoom').value = '1.3';
+            document.getElementById('markerInputConnects').value = '';
+            document.getElementById('markerInputCategory').value = 'system';
+
+            document.getElementById('dataPointsContainer').innerHTML = '';
+            addDataPointRow("Status", "Optimal", "optimal");
+
+            document.getElementById('creator-modal').classList.add('active');
+            NeuralAudio.playBlip(950, 0.1);
+        }
+
+        function openEditMarkerModal(markerData) {
+            isEditingMarker = true;
+            editingMarkerId = markerData.id;
+
+            document.getElementById('modalTitle').innerText = `✏️ Edit Marker [${markerData.id}]`;
+            document.getElementById('modalModeTag').innerText = "EDIT";
+            document.getElementById('btnDeleteMarker').style.display = 'inline-block';
+
+            document.getElementById('markerInputId').value = markerData.id;
+            document.getElementById('markerInputX').value = markerData.x;
+            document.getElementById('markerInputY').value = markerData.y;
+            document.getElementById('markerInputLabel').value = markerData.label || '';
+            document.getElementById('markerInputDesc').value = markerData.description || '';
+            document.getElementById('markerInputDuration').value = markerData.duration || 3.0;
+            document.getElementById('markerInputZoom').value = markerData.zoom || 1.3;
+            document.getElementById('markerInputCategory').value = markerData.category || 'system';
+            document.getElementById('markerInputConnects').value = markerData.connects_to ? markerData.connects_to.join(', ') : '';
+
+            // Data Points
+            const dpContainer = document.getElementById('dataPointsContainer');
+            dpContainer.innerHTML = '';
+            if (markerData.data_points && markerData.data_points.length > 0) {
+                markerData.data_points.forEach(dp => addDataPointRow(dp.label, dp.value, dp.status));
+            } else {
+                addDataPointRow("Status", "Optimal", "optimal");
+            }
+
+            document.getElementById('creator-modal').classList.add('active');
+            NeuralAudio.playBlip(1000, 0.12);
+        }
+
+        function addDataPointRow(label = '', value = '', status = 'optimal') {
+            const container = document.getElementById('dataPointsContainer');
+            const row = document.createElement('div');
+            row.className = 'data-point-row';
+            row.innerHTML = `
+                <input type="text" class="dp-label" placeholder="Metric" value="${label}">
+                <input type="text" class="dp-value" placeholder="Value" value="${value}">
+                <select class="dp-status">
+                    <option value="optimal" ${status === 'optimal' ? 'selected' : ''}>Optimal</option>
+                    <option value="stable" ${status === 'stable' ? 'selected' : ''}>Stable</option>
+                    <option value="warning" ${status === 'warning' ? 'selected' : ''}>Warning</option>
+                    <option value="critical" ${status === 'critical' ? 'selected' : ''}>Critical</option>
+                </select>
+                <button type="button" class="btn-remove-dp">×</button>
+            `;
+            row.querySelector('.btn-remove-dp').addEventListener('click', () => row.remove());
+            container.appendChild(row);
+        }
+
+        function saveMarkerFromModal() {
+            const id = document.getElementById('markerInputId').value.trim();
+            if (!id) return alert("Marker ID is required.");
+
+            const x = parseFloat(document.getElementById('markerInputX').value) || 50;
+            const y = parseFloat(document.getElementById('markerInputY').value) || 50;
+            const label = document.getElementById('markerInputLabel').value.trim() || `Marker ${id}`;
+            const desc = document.getElementById('markerInputDesc').value.trim() || "Telemetry node.";
+            const category = document.getElementById('markerInputCategory').value;
+            const duration = parseFloat(document.getElementById('markerInputDuration').value) || 3.0;
+            const zoom = parseFloat(document.getElementById('markerInputZoom').value) || 1.3;
+            
+            const rawConnects = document.getElementById('markerInputConnects').value;
+            const connects_to = rawConnects ? rawConnects.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+            // Read Data points
+            const data_points = [];
+            document.querySelectorAll('#dataPointsContainer .data-point-row').forEach(row => {
+                const dpLabel = row.querySelector('.dp-label').value.trim();
+                const dpVal = row.querySelector('.dp-value').value.trim();
+                const dpStatus = row.querySelector('.dp-status').value;
+                if (dpLabel && dpVal) {
+                    data_points.push({ label: dpLabel, value: dpVal, status: dpStatus });
+                }
+            });
+
+            const markerObj = {
+                id,
+                x,
+                y,
+                label,
+                description: desc,
+                category,
+                duration,
+                zoom,
+                ...(connects_to.length > 0 && { connects_to }),
+                ...(data_points.length > 0 && { data_points })
+            };
+
+            if (!currentData.markers) currentData.markers = [];
+
+            if (isEditingMarker) {
+                const idx = currentData.markers.findIndex(m => m.id === editingMarkerId);
+                if (idx !== -1) currentData.markers[idx] = markerObj;
+                showToast(`Updated Marker [${id}]`);
+            } else {
+                currentData.markers.push(markerObj);
+                showToast(`Added Marker [${id}]`);
+            }
+
+            buildScene(currentData);
+            document.getElementById('creator-modal').classList.remove('active');
+            NeuralAudio.playBlip(1200, 0.2);
+        }
+
+        function deleteMarkerFromModal() {
+            if (!isEditingMarker || !editingMarkerId) return;
+            if (confirm(`Are you sure you want to delete marker [${editingMarkerId}]?`)) {
+                currentData.markers = currentData.markers.filter(m => m.id !== editingMarkerId);
+                buildScene(currentData);
+                document.getElementById('creator-modal').classList.remove('active');
+                showToast(`Deleted Marker [${editingMarkerId}]`);
+                NeuralAudio.playBlip(500, 0.15);
+            }
+        }
+
+        /* ================= UI DIRECTORY & SCRUBBER ================= */
+        function renderMarkerDirectory(markers) {
+            const listEl = document.getElementById('markerIndexList');
+            listEl.innerHTML = '';
+
+            markers.forEach((m, idx) => {
+                const item = document.createElement('div');
+                item.className = 'marker-item';
+                item.dataset.index = idx;
+                const cat = m.category || 'system';
+                item.innerHTML = `
+                    <span><strong>#${idx + 1}</strong> ${m.label}</span>
+                    <span class="marker-cat-badge status-${cat === 'critical' ? 'critical' : (cat === 'power' ? 'warning' : 'stable')}">${cat}</span>
+                `;
+                item.addEventListener('click', () => {
+                    if (activeDisplayMode === 'creator') {
+                        openEditMarkerModal(m);
+                    } else {
+                        focusMarker(idx);
+                    }
+                });
+                listEl.appendChild(item);
+            });
+        }
+
+        function buildTimelinePips(markers) {
+            const pipsContainer = document.getElementById('timelinePips');
+            pipsContainer.innerHTML = '';
+            const total = markers.length;
+
+            markers.forEach((m, idx) => {
+                const pip = document.createElement('div');
+                pip.className = 'timeline-pip';
+                const pct = (idx / (total - 1 || 1)) * 100;
+                pip.style.left = `${pct}%`;
+                pip.title = `${m.label} (#${idx + 1})`;
+                pip.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    focusMarker(idx);
+                });
+                pipsContainer.appendChild(pip);
+            });
+        }
+
+        function updateActiveMarkerUI(index) {
+            currentMarkerIndex = index;
+            const total = currentData ? currentData.markers.length : 1;
+            const pct = (index / (total - 1 || 1)) * 100;
+
+            document.getElementById('timelineProgress').style.width = `${pct}%`;
+            document.getElementById('timelineCurrentStep').innerText = `Marker ${index + 1} of ${total}`;
+
+            document.querySelectorAll('.timeline-pip').forEach((pip, idx) => {
+                pip.classList.toggle('active', idx === index);
+            });
+            document.querySelectorAll('.marker-item').forEach((item, idx) => {
+                item.classList.toggle('active', idx === index);
+                if (idx === index) item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            });
+        }
+
+        function applyTheme(theme) {
+            document.body.className = '';
+            if (theme !== 'default') document.body.classList.add(`theme-${theme}`);
+            if (!document.getElementById('scanlineToggle').checked) document.body.classList.add('no-scanlines');
+            if (activeDisplayMode === 'creator') document.body.classList.add('mode-creator');
+            gsap.fromTo("body", { opacity: 0.85 }, { opacity: 1, duration: 0.4 });
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast-notice');
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2200);
+        }
+
+        function setTabActive(id) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.id === id));
+        }
+
+        /* ================= EVENT HANDLERS ================= */
+        function setupEventListeners() {
+            // Sound
+            const soundBtn = document.getElementById('btnSoundToggle');
+            soundBtn.addEventListener('click', () => {
+                const on = NeuralAudio.toggle();
+                soundBtn.classList.toggle('active', on);
+                statusText.innerText = on ? "Synthesizer Engaged." : "Audio Muted.";
+            });
+
+            // 3 Organic Craft Frame Switches
+            document.querySelectorAll('.preset-btn, .hud-frame-pill').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    loadPreset(btn.dataset.preset);
+                });
+            });
+
+            // Themes
+            document.getElementById('themeSelect').addEventListener('change', (e) => applyTheme(e.target.value));
+
+            // Scanlines
+            document.getElementById('scanlineToggle').addEventListener('change', (e) => {
+                document.body.classList.toggle('no-scanlines', !e.target.checked);
+            });
+
+            // Parallax
+            let parallaxEnabled = true;
+            document.getElementById('parallaxToggle').addEventListener('change', (e) => {
+                parallaxEnabled = e.target.checked;
+                if (!parallaxEnabled) gsap.to(container, { rotationX: 0, rotationY: 0, duration: 0.4 });
+            });
+
+            visualWrapper.addEventListener('mousemove', (e) => {
+                const rect = visualWrapper.getBoundingClientRect();
+                const xPct = ((e.clientX - rect.left) / rect.width) * 100;
+                const yPct = ((e.clientY - rect.top) / rect.height) * 100;
+
+                hudCrosshair.style.left = `${e.clientX - rect.left}px`;
+                hudCrosshair.style.top = `${e.clientY - rect.top}px`;
+                hudCoords.innerHTML = `<span>X: ${xPct.toFixed(1)}%</span><span>Y: ${yPct.toFixed(1)}%</span>${hudZoomLabel.outerHTML}`;
+
+                if (parallaxEnabled && activeDisplayMode !== 'creator') {
+                    const tiltX = ((e.clientY - rect.top) / rect.height - 0.5) * -6;
+                    const tiltY = ((e.clientX - rect.left) / rect.width - 0.5) * 6;
+                    gsap.to(container, { rotationX: tiltX, rotationY: tiltY, duration: 0.3, ease: "power1.out" });
+                }
+            });
+
+            visualWrapper.addEventListener('mouseleave', () => {
+                if (parallaxEnabled) gsap.to(container, { rotationX: 0, rotationY: 0, duration: 0.6, ease: "power2.out" });
+            });
+
+            // Click on Stage to Add Marker in Creator Mode
+            visualWrapper.addEventListener('click', (e) => {
+                if (activeDisplayMode !== 'creator') return;
+                const rect = container.getBoundingClientRect();
+                const xPct = Math.round(((e.clientX - rect.left) / rect.width) * 1000) / 10;
+                const yPct = Math.round(((e.clientY - rect.top) / rect.height) * 1000) / 10;
+                if (xPct >= 0 && xPct <= 100 && yPct >= 0 && yPct <= 100) {
+                    openCreateMarkerModal(xPct, yPct);
+                }
+            });
+
+            // Mode Tabs
+            document.getElementById('modeTourBtn').addEventListener('click', () => {
+                activeDisplayMode = 'tour';
+                setTabActive('modeTourBtn');
+                document.body.classList.remove('mode-creator');
+                playEntireSequence();
+            });
+
+            document.getElementById('modeAllBtn').addEventListener('click', () => {
+                activeDisplayMode = 'all';
+                setTabActive('modeAllBtn');
+                document.body.classList.remove('mode-creator');
+                showAllMarkersMode();
+            });
+
+            document.getElementById('modeCreatorBtn').addEventListener('click', () => {
+                activeDisplayMode = 'creator';
+                setTabActive('modeCreatorBtn');
+                document.body.classList.add('mode-creator');
+                showAllMarkersMode();
+                showToast("Creator Mode Active: Click to add or edit markers");
+                NeuralAudio.playBlip(600, 0.1);
+            });
+
+            // Play / Pause Sequence Button
+            playPauseBtn.addEventListener('click', () => {
+                if (masterTimeline.paused()) {
+                    playEntireSequence();
+                } else {
+                    masterTimeline.pause();
+                    playPauseBtn.innerText = "▶";
+                    playPauseBtn.classList.remove('active');
+                    statusText.innerText = "Playback Paused.";
+                }
+            });
+
+            document.getElementById('btnNext').addEventListener('click', () => {
+                if (currentData && currentMarkerIndex < currentData.markers.length - 1) {
+                    focusMarker(currentMarkerIndex + 1);
+                }
+            });
+
+            document.getElementById('btnPrev').addEventListener('click', () => {
+                if (currentMarkerIndex > 0) focusMarker(currentMarkerIndex - 1);
+            });
+
+            document.getElementById('btnResetView').addEventListener('click', () => {
+                gsap.to(container, { scale: 1, x: 0, y: 0, duration: 0.8, ease: "power2.inOut" });
+                hudZoomLabel.innerText = "ZOOM: 1.0x";
+            });
+
+            // Speed
+            document.querySelectorAll('.speed-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    playbackSpeed = parseFloat(btn.dataset.speed);
+                    masterTimeline.timeScale(playbackSpeed);
+                });
+            });
+
+            // Fullscreen
+            document.getElementById('btnFullscreen').addEventListener('click', () => {
+                if (!document.fullscreenElement) visualWrapper.requestFullscreen().catch(() => {});
+                else document.exitFullscreen();
+            });
+
+            // Search filter
+            document.getElementById('markerSearchInput').addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                document.querySelectorAll('.marker-item').forEach(item => {
+                    item.style.display = item.innerText.toLowerCase().includes(term) ? 'flex' : 'none';
+                });
+            });
+
+            // Custom Uploads
+            document.getElementById('imageUpload').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        container.style.backgroundImage = `url('${event.target.result}')`;
+                        showToast("Custom image mounted.");
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            document.getElementById('jsonUpload').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        try {
+                            const data = JSON.parse(event.target.result);
+                            buildScene(data);
+                            showToast("Custom schema loaded.");
+                        } catch(err) { alert("Invalid JSON: " + err.message); }
+                    };
+                    reader.readAsText(file);
+                }
+            });
+
+            // Export & Copy JSON
+            document.getElementById('btnExportJSON').addEventListener('click', () => {
+                if (!currentData) return;
+                const blob = new Blob([JSON.stringify(currentData, null, 4)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `organic_craft_${currentPresetKey}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast("JSON file downloaded!");
+                NeuralAudio.playBlip(1200, 0.2);
+            });
+
+            document.getElementById('btnCopyJSON').addEventListener('click', () => {
+                if (!currentData) return;
+                navigator.clipboard.writeText(JSON.stringify(currentData, null, 4)).then(() => {
+                    showToast("JSON copied to clipboard!");
+                    NeuralAudio.playBlip(1100, 0.15);
+                });
+            });
+
+            // Creator Modal Controls
+            document.getElementById('btnNewMarkerTop').addEventListener('click', () => openCreateMarkerModal(50, 50));
+            document.getElementById('btnAddDataPoint').addEventListener('click', () => addDataPointRow());
+            document.getElementById('btnSaveMarker').addEventListener('click', saveMarkerFromModal);
+            document.getElementById('btnDeleteMarker').addEventListener('click', deleteMarkerFromModal);
+            document.getElementById('btnCancelMarker').addEventListener('click', () => {
+                document.getElementById('creator-modal').classList.remove('active');
+            });
+
+            // Keyboard Shortcuts
+            window.addEventListener('keydown', (e) => {
+                if (['INPUT', 'SELECT', 'TEXTAREA'].includes(document.activeElement.tagName)) return;
+
+                switch(e.code) {
+                    case 'Space':
+                        e.preventDefault();
+                        playPauseBtn.click();
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        document.getElementById('btnNext').click();
+                        break;
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        document.getElementById('btnPrev').click();
+                        break;
+                    case 'Digit1': loadPreset('frame1'); break;
+                    case 'Digit2': loadPreset('frame2'); break;
+                    case 'Digit3': loadPreset('frame3'); break;
+                    case 'KeyM': soundBtn.click(); break;
+                    case 'KeyF': document.getElementById('btnFullscreen').click(); break;
+                    case 'KeyO': document.getElementById('modeAllBtn').click(); break;
+                    case 'KeyC': document.getElementById('modeCreatorBtn').click(); break;
+                    case 'KeyR': document.getElementById('btnResetView').click(); break;
+                    case 'Escape': document.getElementById('creator-modal').classList.remove('active'); break;
+                }
+            });
+        }
     </script>
 </body>
 

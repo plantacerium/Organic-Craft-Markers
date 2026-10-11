@@ -1,140 +1,141 @@
 <div align="center">
-  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status">
-  <img src="https://img.shields.io/badge/Tech-Vanilla_JS-f7df1e?style=for-the-badge&logo=javascript&logoColor=black" alt="Vanilla JS">
-  <img src="https://img.shields.io/badge/Animations-GSAP-88CE02?style=for-the-badge" alt="GSAP">
-  <img src="https://img.shields.io/badge/UI-Glassmorphism-00f2ff?style=for-the-badge" alt="Glassmorphism UI">
-</div>
-
-<br>
-
-<div align="center">
-  <h1>🌌 Organic Craft: The Neural Bridge</h1>
-  <p><strong>A Premium, Dynamic, and Immersive Telemetry Visualizer</strong></p>
+  <h1>🌌 Organic Craft: Next-Gen Neural Telemetry Nexus</h1>
+  <p><strong>A High-Tier, Interactive, Audio-Synthesized Biomechanical Exploration Suite</strong></p>
+  <p><a href="https://github.com/plantacerium/Organic-Craft-Markers">https://github.com/plantacerium/Organic-Craft-Markers</a></p>
 </div>
 
 ![Organic Craft Marker](./Demo.JPG)
+
 ---
 
 ## 🚀 Overview
 
-**Organic Craft - The Neural Bridge** is a high-tier, interactive image marker and data visualization tool. Designed with cutting-edge UI/UX principles, it instantly transforms static images and telemetry data (JSON) into a breathtaking cinematic experience driven by **GSAP** (GreenSock Animation Platform) and modern **Glassmorphism**.
+**Organic Craft - Neural Telemetry Nexus** is a state-of-the-art interactive image marker, telemetry analyzer, and cinematic storytelling engine. Powered by **GSAP 3**, **Web Audio API procedural sound synthesis**, **HTML5 Canvas stardust physics**, and **Glassmorphism 2.0**, it transforms static imagery into a living, breathing spaceship dashboard.
 
-The application operates as a standalone web experience. It automatically attempts to sync with local telemetry (`organic_craft.json`) and visuals (`organic_craft_frame_3_the_neural_bridge.png`) upon launch, removing friction and delivering an immediate "wow" factor.
+Whether you're exploring deep space leviathans, analyzing biometric core motors, or building your own custom telemetry overlays, the platform delivers zero-friction immersion right in the browser.
+
+---
+
+## ✨ Cutting-Edge Immersion & Features
+
+### 🎧 Procedural Web Audio Synthesizer (`NeuralAudio`)
+- **Zero External Dependencies**: 100% synthesized in real time via the browser's native **Web Audio API**.
+- **Binaural Cosmic Drone**: Subtle 55Hz low-pass sine drone generating an atmospheric deep-space acoustic cushion.
+- **Holographic Chimes & Blips**: Dynamic frequency chirps when markers illuminate or cards open.
+- **Synaptic Laser Zaps**: Electric audio frequency sweeps when SVG neural links connect.
+- **Sub-Bass Zoom Booms**: Cinematic low-frequency impacts when focusing on high-threat or critical systems.
+- **Equalizer Waveform Visualizer**: Real-time animated audio toggle in the HUD header with instant mute shortcut (`M`).
+
+### 🌌 Organic Craft Living Frames Switcher
+Instantly jump between the 3 main anatomical frames with one click in the sidebar or the top HUD pills:
+1. 🌌 **Frame 1: Celestial Leviathan** (`organic_craft_frame_1_celestial_leviathan.png` + `organic_craft_frame_1.json`) — Exterior biological hull, Flower of Life mandala eye, solar tendrils, and constellation telemetry.
+2. ⚛️ **Frame 2: The Heart (Motor)** (`organic_craft_frame_2_the_pulsing_core.png` + `organic_craft_frame_2.json`) — Contained singularity vortex, runic gyroscopic rings, translucent bone-cage, and biometric resonance meters.
+3. 🧠 **Frame 3: The Neural Bridge** (`organic_craft_frame_3_the_neural_bridge.png` + `organic_craft_frame_3.json`) — Bridge command sanctuary, pilot spinal link throne, terrestrial holomap, proximity radar, and living data tendrils.
+
+### 🎮 Tactical Exploration & Expanded Creator Modes
+- 🎬 **Tour Mode (Cinematic)**: Plays the full automated sequence with camera zooms, staggered neural link draws, and synchronized ambient lighting. Supports auto-looping.
+- 🌐 **Show All (Tactical Overview)**: Renders all markers and neural connections simultaneously for free manual exploration.
+- 🛠️ **Expanded Creator & Pin Mode**: Full authoring suite!
+  - Click anywhere on the visual stage to place new telemetry markers.
+  - Click on any existing marker to edit all properties or **Delete** it.
+  - **Drag and Drop markers** directly on the canvas to visually reposition them in real time with live SVG line updates.
+  - Add and manage multiple telemetry `data_points` with dynamic status tags (`optimal`, `stable`, `warning`, `critical`).
+  - Configure zoom levels, step duration, and custom `connects_to` network topologies.
+  - Download the modified schema with **Export JSON** or use **Copy JSON** for instant clipboard sharing.
+
+### 🕹️ Interactive HUD & Scrubber Timeline
+- **Timeline Scrubber**: Clickable pip markers allow jumping directly to any step.
+- **Speed Controls**: Select playback rate on the fly (`0.5x`, `1.0x`, `1.5x`, `2.0x`).
+- **Targeting Reticle**: Smooth crosshair cursor tracking with real-time coordinate readouts (`X: ##.#%`, `Y: ##.#%`).
+- **Sci-Fi Corner Brackets & CRT Scanline Filter**: Optional toggleable retro-futuristic CRT scanlines and vignette.
+- **3D Parallax Tilt**: Gyroscopic mouse tilt effect providing tangible 3D depth to the viewport.
+- **Cosmic Bio-Spore Particles**: 60+ floating stardust canvas particles that gently deflect around user cursor movements.
+
+### 🎨 Multi-Atmosphere Theme Engine
+Five distinct CSS custom property themes:
+- 🔵 **Neural Bridge (Default)**: Cyan & deep-space navy.
+- 🟡 **Solar Singularity**: Golden amber & warm sacred-geometry glow.
+- 🔴 **Bio-Hazard**: Crimson warning alert matrix.
+- 🟢 **Void Matrix**: Monospace terminal hacker green.
+- ⚪ **Quantum Core**: Ultra-luxurious monochrome minimalism.
 
 ---
 
-## ✨ Premium Features
+## ⚡ Tactical Keyboard Hotkeys
 
-- 🎭 **Cinematic GSAP Animations**: Smooth, staggering, and elastic intro sequencing that brings data points to life. Hover interactions trigger organic macro-animations. 
-- 🪞 **Glassmorphism UI**: Beautiful frosted-glass sidebar panels (`backdrop-filter`) that adapt dynamically to underlying content.
-- 🎨 **Multi-Environment Themes**: Seamless toggle between four distinct UI core modes built with deeply integrated CSS Variables:
-  - 🔵 **Neural Bridge (Default)**: Cyan/Deep Blue neon aesthetics.
-  - 🔴 **Bio-Hazard**: Aggressive crimson and warning elements.
-  - 🟢 **Void Matrix**: Monospace hacker-terminal aesthetic.
-  - ⚪ **Quantum Core**: Ultra-premium monochrome and sleek design.
-- ⚡ **Zero Friction Auto-Load**: The application utilizes standard modern Browser Fetch APIs to instantly mount the initial `.json` and `.png` models.
-- 📁 **Manual Override**: Sleek custom file upload controls allow for uploading any new image and mapping file on the fly.
+| Key | Action |
+| :--- | :--- |
+| <kbd>SPACE</kbd> | Play / Pause sequence |
+| <kbd>←</kbd> / <kbd>→</kbd> | Jump to Previous / Next Marker |
+| <kbd>1</kbd> / <kbd>2</kbd> / <kbd>3</kbd> | Quick load Frame 1, Frame 2, or Frame 3 |
+| <kbd>M</kbd> | Toggle Web Audio Synthesizer (Mute / Unmute) |
+| <kbd>F</kbd> | Toggle Stage Fullscreen |
+| <kbd>O</kbd> | Toggle Tactical Overview Mode (Show All) |
+| <kbd>C</kbd> | Toggle Pin / Marker Creator Mode |
+| <kbd>R</kbd> | Reset Camera View & Zoom |
+| <kbd>ESC</kbd> | Close Modals & Overlays |
 
 ---
-## ⚡ Support
-<div align="center">
 
-**Made with ❤️ and ☕ by the Plantacerium**
+## 🛠️ Quick Launch
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/plantacerium)
-
-⭐**Star us on GitHub**⭐
-</div>
-
-## 🛠️ Installation & Usage
-
-Because the application fetches local files (`organic_craft.json`) automatically, opening `index.html` directly in your browser (`file:///...`) might trigger strict **CORS (Cross-Origin Resource Sharing)** protocols depending on your browser.
-
-To run the application with full functionality, serve it via a lightweight local server.
-
-### Option A: Node.js (Recommended)
-If you have Node.js installed, open your terminal in the project directory and run:
+### Option A: Node.js
 ```bash
 npx serve .
 ```
-Open the provided `http://localhost:3000` link in your browser.
+Open `http://localhost:3000` in your browser.
 
 ### Option B: Python
-If you have Python installed, open your terminal and run:
 ```bash
 python -m http.server 8000
 ```
 Open `http://localhost:8000` in your browser.
 
-*(If you don't run a server, the auto-fetch will fail elegantly, and you can still manually upload the `organic_craft_frame_3_the_neural_bridge.png` and `organic_craft.json` using the side-panel controls.)*
+*(If opening offline via `file:///`, the custom file uploader and built-in fallback modes ensure smooth operation regardless of CORS restrictions.)*
 
 ---
 
-## 📐 Data Architecture (Extended JSON Schema)
+## 📐 Data Architecture (JSON Schema)
 
-Want to map your own image? The application expects a JSON file with the following powerful structure.
-
-### Base Component Link (Minimal Schema)
-This is the required core structure to plot standard markers onto an image:
+The visualizer dynamically generates cards, lines, radar rings, and telemetry tables from modular JSON files:
 
 ```json
 {
-    "scene_name": "Organic Craft - The Neural Bridge",
+    "scene_name": "Organic Node - Singularity Core",
     "markers": [
         {
             "id": "m1",
-            "x": 19,
-            "y": 8,
-            "label": "Logo: Organic Craft",
-            "description": "Visual identity of the vessel.",
-            "duration": 2 
-        }
-    ]
-}
-```
-
-### Premium Features (Extended Schema Example)
-The architecture supports advanced rendering and cinematic triggers using properties like `category`, `connects_to`, `zoom`, and `data_points`.
-
-```json
-{
-    "scene_name": "Organic Node",
-    "markers": [
-        {
-            "id": "m1",
-            "x": 19,
-            "y": 8,
-            "label": "Core Processor",
-            "description": "Main logic unit.",
-            "duration": 2.5,
-            "category": "critical",
-            "zoom": 1.5,
+            "x": 50,
+            "y": 50,
+            "label": "Singularity Core",
+            "description": "Primary propulsion and life-support generator.",
+            "duration": 4,
+            "category": "power",
+            "zoom": 1.4,
             "connects_to": ["m2", "m3"],
             "data_points": [
-                {"label": "Temp", "value": "90C", "status": "warning"},
-                {"label": "Load", "value": "99%", "status": "critical"}
+                {"label": "Warp Output", "value": "1.21 GW", "status": "optimal"},
+                {"label": "Containment", "value": "Stable", "status": "stable"}
             ]
         }
     ]
 }
 ```
 
-### Schema Breakdown:
-- `scene_name`: (String) General title for the dataset.
-- `markers`: (Array) The collection of points.
-  - `id`: (String) Unique identifier (required for `connects_to` targets).
-  - `x`: (Number) X coordinate percentage (0 to 100) from Left.
-  - `y`: (Number) Y coordinate percentage (0 to 100) from Top.
-  - `label`: (String) Display title mapping to the marker.
-  - `description`: (String) Secondary detailed data text.
-  - `duration`: (Number) Time (in seconds) the automated sequence will pause here.
-  
-#### 🔥 Premium Phase 2 Properties:
-  - `category`: (String) Colors the marker dynamically. Accepts `system`, `critical`, `environment`, `power`, or `navigation`.
-  - `zoom`: (Number) Automatically pans and zooms the camera (e.g. `1.5` for 150%) to this coordinate when active.
-  - `connects_to`: (Array of Strings) Draws animated glowing neural lines to the listed `id`s.
-  - `data_points`: (Array of Objects) Creates a sleek telemetry terminal grid inside the info card. Each object requires `label`, `value`, and `status` (`optimal`, `stable`, `warning`, `critical`).
+### Supported Properties:
+- `id` *(String)*: Unique marker identifier.
+- `x`, `y` *(Number)*: Relative position percentage (0–100%).
+- `label` *(String)*: Marker headline title.
+- `description` *(String)*: In-depth technical note or readout.
+- `duration` *(Number)*: Auto-tour duration in seconds.
+- `category` *(String)*: `system`, `critical`, `environment`, `power`, or `navigation`.
+- `zoom` *(Number)*: Camera zoom factor (e.g. `1.3` = 130%).
+- `connects_to` *(Array)*: IDs of connected nodes for SVG neural link animation.
+- `data_points` *(Array)*: Telemetry key-values with status badges (`optimal`, `stable`, `warning`, `critical`).
 
 ---
 
-> *"The mind and the machine. Connected across the Void."*
+<div align="center">
+  <sub>Built for next-gen interactive web storytelling & technical visualization.</sub><br>
+  <strong>Organic Craft © 2026</strong>
+</div>
